@@ -43,6 +43,26 @@
         <table>
             <tr>
                 <td>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Group Code</mat-label>
+                        <mat-select [(ngModel)]="currentMember.groupCode" name="groupCode">
+                          <mat-option *ngFor="let code of groupCodes" [value]="code">
+                            {{code}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Location Code</mat-label>
+                        <mat-select [(ngModel)]="currentMember.locationCode" name="locationCode">
+                          <mat-option *ngFor="let code of locationCodes" [value]="code.value">
+                            {{code.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>                
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <mat-form-field appearance="legacy" style="width:360px !important">
                         <input id="address" name="address" required matInput [(ngModel)]="currentMember.addresses[0].address1" type="text"
                             placeholder="Address">

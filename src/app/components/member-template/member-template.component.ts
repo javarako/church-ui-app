@@ -37,7 +37,17 @@ export class MemberTemplateComponent implements OnInit {
     {value: 'CA', viewValue: 'Canada'}, 
     {value: 'US', viewValue: 'United States'}
   ];  
-
+  //Location_1("1 구역"), 
+  locationCodes: OptionValue[] = [
+    {value: 'Location_1', viewValue: '1 구역'}, 
+    {value: 'Location_2', viewValue: '2 구역'}, 
+    {value: 'Location_3', viewValue: '3 구역'}, 
+    {value: 'Location_4', viewValue: '4 구역'}, 
+    {value: 'Location_5', viewValue: '5 구역'}, 
+    {value: 'Location_6', viewValue: '6 구역'}
+  ];  
+  //Samaritan, Emmao, John, Joseph, Jonah
+  groupCodes: string[] = ['Samaritan', 'Emmao', 'John', 'Joseph', 'Jonah'];
   phoneTypes: string[] = ['Home', 'Work', 'Cell', 'Other'];
   displayedPhoneColumns: string[] = ['type', 'number', 'extension', 'action'];
   newPhone: any = {}; 

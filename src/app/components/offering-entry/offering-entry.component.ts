@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatInput } from '@angular/material/input';
 import { OfferingService } from 'src/app/services/offering.service';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
@@ -21,6 +22,7 @@ interface AmountSummary {
 })
 export class OfferingEntryComponent implements OnInit {
 
+  @ViewChild('offeringNumber') offeringNumberInput: ElementRef;
   faEdit = faEdit;
   trashAlt = faTrashAlt;
 
@@ -130,6 +132,7 @@ export class OfferingEntryComponent implements OnInit {
           this.amountAdd(response);
           this.newOffering();
           this.editable = false;
+          this.offeringNumberInput.nativeElement.focus();
         },
         error => {
           console.log(error);
