@@ -1,0 +1,139 @@
+<div class="list row">
+    <div class="col-md-8">
+        <div class="input-group mb-3">
+            <mat-form-field class="example-full-width" appearance="fill" style="width:140px !important">
+                <mat-label>Choose a Sunday</mat-label>
+                <input matInput [matDatepickerFilter]="sundayFilter" [matDatepicker]="sundayPicker"
+                    [(ngModel)]="currentOffering.offeringSunday" (dateChange)="retrieveMembers()">
+                <mat-datepicker-toggle matSuffix [for]="sundayPicker"></mat-datepicker-toggle>
+                <mat-datepicker #sundayPicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill" style="width:140px !important">
+                <mat-label>Offering date</mat-label>
+                <input matInput [matDatepicker]="offeringPicker" [(ngModel)]="currentOffering.offeringDate">
+                <mat-datepicker-toggle matSuffix [for]="offeringPicker"></mat-datepicker-toggle>
+                <mat-datepicker #offeringPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div *ngIf="currentOffering.offeringSunday" class="col-md-12">
+        <mat-form-field appearance="legacy" style="width:70px !important">
+            <input id="offeringNumber" name="offeringNumber" required matInput
+                [(ngModel)]="currentOffering.offeringNumber" type="number" placeholder="Number">
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" style="width:120px !important">
+            <mat-label>Offering Type</mat-label>
+            <mat-select [(ngModel)]="currentOffering.offeringType" name="offeringType">
+                <mat-option *ngFor="let type of offeringTypes" [value]="type.value">
+                    {{type.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" style="width:120px !important">
+            <mat-label>Amount Type</mat-label>
+            <mat-select [(ngModel)]="currentOffering.amountType" name="amountType">
+                <mat-option *ngFor="let type of amountTypes" [value]="type.value">
+                    {{type.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" style="width:100px !important">
+            <input id="amount" name="amount" required matInput [(ngModel)]="currentOffering.amount" type="number"
+                placeholder="Amount">
+        </mat-form-field>
+
+        <button *ngIf="currentOffering.offeringNumber && currentOffering.amount && !editable" type="submit"
+            mat-stroked-button color="primary" (click)="saveOffering()">
+            Submit
+        </button>
+
+        <button *ngIf="currentOffering.offeringNumber && currentOffering.amount && editable" type="submit"
+            mat-stroked-button color="primary" (click)="updateOffering()">
+            Edit
+        </button>
+    </div>
+
+    <div *ngIf="offerings && offerings.length > 0" class="col-md-8">
+        <h4>Offering List</h4>
+        <div *ngIf="message" style="color:blue">{{message}}</div>
+
+        <!-- List start -->
+        <table mat-table [dataSource]="offerings" class="mat-elevation-z2">
+            <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+
+            <ng-container matColumnDef="offeringDate">
+                <th mat-header-cell *matHeaderCellDef> Offering Date </th>
+                <td mat-cell *matCellDef="let element">{{element.offeringDate | date : "yyyy/MM/dd"}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="offeringNumber">
+                <th mat-header-cell *matHeaderCellDef> Number </th>
+                <td mat-cell *matCellDef="let element;">{{element.offeringNumber}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="offeringType">
+                <th mat-header-cell *matHeaderCellDef> Offering Type </th>
+                <td mat-cell *matCellDef="let element;">{{element.offeringType}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="amountType">
+                <th mat-header-cell *matHeaderCellDef> Amount Type </th>
+                <td mat-cell *matCellDef="let element;">{{element.amountType}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let element;">{{element.amount}}</td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> Edit </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center; vertical-align: middle;">
+                    <fa-icon [icon]="faEdit" size="lg" (click)="editOffering(element)"></fa-icon>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef> Delete </th>
+                <td mat-cell *matCellDef="let element" style="text-align: center; vertical-align: middle;">
+                    <fa-icon [icon]="trashAlt" size="lg" (click)="deleteOffering(element.id, element.amountType, element.amount)"></fa-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumns">
+            </tr>
+        </table>
+    </div>
+
+    <div *ngIf="amountSummary && amountSummary.length > 0" class="col-md-4">
+        <h4>Total amount: {{totalAmount}}</h4>
+        <!-- List start -->
+        <table mat-table [dataSource]="amountSummary" class="mat-elevation-z2">
+            <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef> Amount Type </th>
+                <td mat-cell *matCellDef="let element;">{{element.type}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef> Total </th>
+                <td mat-cell *matCellDef="let element;">{{element.total}}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedTotalColumns"></tr>
+            <tr mat-row class="table-row" *matRowDef="let row; columns: displayedTotalColumns">
+            </tr>
+        </table>
+
+    </div>
+</div>

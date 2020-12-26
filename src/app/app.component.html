@@ -1,0 +1,23 @@
+<div>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">United Church of Canada</a>
+    <div class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a routerLink="members" class="nav-link" >Members</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="add" class="nav-link">New Member</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="numbers" class="nav-link">Offering Number</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="offerings" class="nav-link">Offering Entry</a>
+      </li>
+    </div>
+  </nav>
+
+  <div class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>

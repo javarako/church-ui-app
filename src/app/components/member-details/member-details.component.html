@@ -1,0 +1,26 @@
+<div class="list row">
+  <div>
+    <h4>Member</h4>
+    <app-member-template [currentMember]="currentMember"></app-member-template>
+
+    <button mat-stroked-button color="warn" (click)="deleteMember()">
+      Delete
+    </button>
+  
+    <button type="submit" mat-stroked-button color="primary" (click)="updateMember()">
+      Update
+    </button>
+  </div> 
+
+  <div>
+  </div>
+
+  <div>
+    <p>{{ message }}</p>
+
+    <div *ngIf="!currentMember">
+      <br />
+      <p>Cannot access this Member...</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+<div *ngIf="currentMember" class="edit-form">
+    <mat-card class="mat-elevation-z2">
+        <table>
+            <tr style="vertical-align:top">
+                <td>
+                    <mat-form-field appearance="legacy">
+                        <input id="name" name="name" required matInput [(ngModel)]="currentMember.name" type="text"
+                            placeholder="Lastname, Firstname">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="legacy">
+                        <input id="nickName" name="nickName" required matInput [(ngModel)]="currentMember.nickName" type="text"
+                            placeholder="Name [Korean]">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="legacy">
+                        <input id="primaryEmail" name="primaryEmail" required matInput
+                            [(ngModel)]="currentMember.primaryEmail" type="email" email="true"
+                            placeholder="Primary Email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+                        <mat-error>Please enter a valid email address</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="legacy">
+                        <input id="secondaryEmail" name="secondaryEmail" required matInput
+                            [(ngModel)]="currentMember.secondaryEmail" type="email" email="true"
+                            placeholder="Secondary Email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+                        <mat-error>Please enter a valid email address</mat-error>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field style="width: 300px;" appearance="outline">
+                        <textarea id="comment" name="comment" matInput rows="10" cols="50"
+                            [(ngModel)]="currentMember.comment" #msg maxlength="500"
+                            placeholder="Comment"></textarea>
+                        <mat-hint align="end" >{{msg.value.length}} / 500</mat-hint>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </mat-card>
+
+    <mat-card class="mat-elevation-z2">
+        <table>
+            <tr>
+                <td>
+                    <mat-form-field appearance="legacy" style="width:360px !important">
+                        <input id="address" name="address" required matInput [(ngModel)]="currentMember.addresses[0].address1" type="text"
+                            placeholder="Address">
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <input id="city" name="city" required matInput [(ngModel)]="currentMember.addresses[0].city" type="text"
+                            placeholder="City">
+                    </mat-form-field>                
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <mat-form-field appearance="legacy" >
+                        <mat-label>Province</mat-label>
+                        <mat-select [(ngModel)]="currentMember.addresses[0].province" name="province">
+                          <mat-option *ngFor="let provinceType of provinceTypes" [value]="provinceType.value">
+                            {{provinceType.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <mat-label>Province</mat-label>
+                        <mat-select [(ngModel)]="currentMember.addresses[0].country" name="country">
+                          <mat-option *ngFor="let countryType of countryTypes" [value]="countryType.value">
+                            {{countryType.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy">
+                        <input id="postalCode" name="postalCode" 
+                            required matInput [(ngModel)]="currentMember.addresses[0].postalCode" type="text"
+                            maxlength="6" placeholder="Postal Code">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+    </mat-card>
+
+    <table mat-table [dataSource]="currentMember.phones" class="mat-elevation-z2">
+        <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Phone Type </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+                <mat-select [(ngModel)]="element.type" name="type{{i}}">
+                    <mat-option *ngFor="let phoneType of phoneTypes" [value]="phoneType">
+                      {{phoneType}}
+                    </mat-option>
+                  </mat-select>
+            </td>
+        </ng-container>
+
+        <!-- Number Column -->
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+                <input id="number{{i}}" name="number{{i}}" required matInput [(ngModel)]="element.number" 
+                type="text" placeholder="Number">
+            </td>
+        </ng-container>
+
+        <!-- Ext. Column -->
+        <ng-container matColumnDef="extension">
+            <th mat-header-cell *matHeaderCellDef> Extension </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+                <input id="extension{{i}}" name="extension{{i}}" required matInput [(ngModel)]="element.extension" 
+                type="text" placeholder="Extension">
+            </td>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>
+                Action <fa-icon [icon]="plusSquare" size="lg" (click)="addRow()"></fa-icon>
+            </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center; vertical-align: middle;">
+                <fa-icon [icon]="trashAlt" size="lg" (click)="deleteRow(element.id)"></fa-icon>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedPhoneColumns"></tr>
+        <tr mat-row class="table-row"
+        *matRowDef="let row; columns: displayedPhoneColumns;"></tr>
+    </table>
+</div>
