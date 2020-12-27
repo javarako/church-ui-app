@@ -59,6 +59,13 @@
                           </mat-option>
                         </mat-select>
                     </mat-form-field>                
+                    <mat-form-field class="example-full-width" appearance="fill" style="width:140px !important">
+                        <mat-label>Birth Date</mat-label>
+                        <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="datePicker"
+                            [(ngModel)]="currentMember.birthDate" >
+                        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datePicker></mat-datepicker>
+                    </mat-form-field>
                 </td>
             </tr>
             <tr>

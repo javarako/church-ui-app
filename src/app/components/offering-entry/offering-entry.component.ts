@@ -169,6 +169,7 @@ export class OfferingEntryComponent implements OnInit {
           this.originalAmount = 0;
           this.message = 'The offering was updated successfully!';
           this.newOffering();
+          this.offeringNumberInput.nativeElement.focus();
         },
         error => {
           console.log(error);
@@ -194,6 +195,7 @@ export class OfferingEntryComponent implements OnInit {
               this.offerings = this.offerings.filter((value, key) => {
                 return value.id != id;
               });
+              this.offeringNumberInput.nativeElement.focus();
             },
             error => {
               console.log(error);
