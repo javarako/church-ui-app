@@ -4,6 +4,8 @@ import { MemberService } from 'src/app/services/member.service';
 interface Member {
   name: string;
   nickName: string;
+  spouseName: string;
+  spouseNickName: string;
   primaryEmail: string;
   secondaryEmail: string;
   comment: string;
@@ -22,6 +24,8 @@ export class AddMemberComponent implements OnInit {
   currentMember = {
     name: '',
     nickName: '',
+    spouseName: '',
+    spouseNickName: '',
     primaryEmail: '',
     secondaryEmail: '',
     comment: '',
@@ -47,6 +51,8 @@ export class AddMemberComponent implements OnInit {
     const data = {
       name: this.currentMember.name,
       nickName: this.currentMember.nickName,
+      spouseName: this.currentMember.spouseName,
+      spouseNickName: this.currentMember.spouseNickName,
       primaryEmail: this.currentMember.primaryEmail,
       secondaryEmail: this.currentMember.secondaryEmail,
       comment: this.currentMember.comment,
@@ -70,6 +76,8 @@ export class AddMemberComponent implements OnInit {
     this.currentMember = {
       name: '',
       nickName: '',
+      spouseName: '',
+      spouseNickName: '',
       primaryEmail: '',
       secondaryEmail: '',
       comment: '',

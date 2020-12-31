@@ -3,33 +3,61 @@
         <table>
             <tr style="vertical-align:top">
                 <td>
-                    <mat-form-field appearance="legacy">
-                        <input id="name" name="name" required matInput [(ngModel)]="currentMember.name" type="text"
+                    <mat-form-field appearance="legacy" style="width:130px !important">
+                        <input #name required matInput [(ngModel)]="currentMember.name" type="text"
                             placeholder="Lastname, Firstname">
                     </mat-form-field>
 
-                    <mat-form-field appearance="legacy">
-                        <input id="nickName" name="nickName" required matInput [(ngModel)]="currentMember.nickName" type="text"
+                    <mat-form-field appearance="legacy" style="width:130px !important">
+                        <input #nickName required matInput [(ngModel)]="currentMember.nickName" type="text"
                             placeholder="Name [Korean]">
                     </mat-form-field>
 
-                    <mat-form-field appearance="legacy">
-                        <input id="primaryEmail" name="primaryEmail" required matInput
-                            [(ngModel)]="currentMember.primaryEmail" type="email" email="true"
-                            placeholder="Primary Email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
-                        <mat-error>Please enter a valid email address</mat-error>
+                    <mat-form-field appearance="legacy" style="width:130px !important">
+                        <input #spouseName required matInput [(ngModel)]="currentMember.spouseName" type="text"
+                            placeholder="Spouse Name">
                     </mat-form-field>
 
-                    <mat-form-field appearance="legacy">
-                        <input id="secondaryEmail" name="secondaryEmail" required matInput
-                            [(ngModel)]="currentMember.secondaryEmail" type="email" email="true"
-                            placeholder="Secondary Email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
-                        <mat-error>Please enter a valid email address</mat-error>
+                    <mat-form-field appearance="legacy" style="width:130px !important">
+                        <input #spouseNickName required matInput [(ngModel)]="currentMember.spouseNickName" type="text"
+                            placeholder="Spouse Name [Korean]">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="legacy" style="width:130px !important">
+                        <mat-label>Group Code</mat-label>
+                        <mat-select [(ngModel)]="currentMember.groupCode" #groupCode>
+                          <mat-option *ngFor="let code of groupCodes" [value]="code.value">
+                            {{code.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="legacy" style="width:130px !important">
+                        <mat-label>Location Code</mat-label>
+                        <mat-select [(ngModel)]="currentMember.locationCode" #locationCode>
+                          <mat-option *ngFor="let code of locationCodes" [value]="code.value">
+                            {{code.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>                
+
+                    <mat-form-field class="example-full-width" appearance="fill" style="width:130px !important">
+                        <mat-label>Birth Date</mat-label>
+                        <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="datePicker"
+                            [(ngModel)]="currentMember.birthDate" >
+                        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #datePicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill" style="width:130px !important">
+                        <mat-label>Spouse Birth Date</mat-label>
+                        <input matInput [matDatepickerFilter]="spouseDateFilter" [matDatepicker]="spouseDatePicker"
+                            [(ngModel)]="currentMember.spouseBirthDate" >
+                        <mat-datepicker-toggle matSuffix [for]="spouseDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #spouseDatePicker></mat-datepicker>
                     </mat-form-field>
                 </td>
                 <td>
                     <mat-form-field style="width: 300px;" appearance="outline">
-                        <textarea id="comment" name="comment" matInput rows="10" cols="50"
+                        <textarea #comment matInput rows="10" cols="50"
                             [(ngModel)]="currentMember.comment" #msg maxlength="500"
                             placeholder="Comment"></textarea>
                         <mat-hint align="end" >{{msg.value.length}} / 500</mat-hint>
@@ -44,38 +72,28 @@
             <tr>
                 <td>
                     <mat-form-field appearance="legacy">
-                        <mat-label>Group Code</mat-label>
-                        <mat-select [(ngModel)]="currentMember.groupCode" name="groupCode">
-                          <mat-option *ngFor="let code of groupCodes" [value]="code">
-                            {{code}}
-                          </mat-option>
-                        </mat-select>
+                        <input #primaryEmail required matInput
+                            [(ngModel)]="currentMember.primaryEmail" type="email" email="true"
+                            placeholder="Primary Email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+                        <mat-error>Please enter a valid email address</mat-error>
                     </mat-form-field>
+
                     <mat-form-field appearance="legacy">
-                        <mat-label>Location Code</mat-label>
-                        <mat-select [(ngModel)]="currentMember.locationCode" name="locationCode">
-                          <mat-option *ngFor="let code of locationCodes" [value]="code.value">
-                            {{code.viewValue}}
-                          </mat-option>
-                        </mat-select>
-                    </mat-form-field>                
-                    <mat-form-field class="example-full-width" appearance="fill" style="width:140px !important">
-                        <mat-label>Birth Date</mat-label>
-                        <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="datePicker"
-                            [(ngModel)]="currentMember.birthDate" >
-                        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #datePicker></mat-datepicker>
+                        <input #secondaryEmail required matInput
+                            [(ngModel)]="currentMember.secondaryEmail" type="email" email="true"
+                            placeholder="Secondary Email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+                        <mat-error>Please enter a valid email address</mat-error>
                     </mat-form-field>
                 </td>
             </tr>
             <tr>
                 <td>
                     <mat-form-field appearance="legacy" style="width:360px !important">
-                        <input id="address" name="address" required matInput [(ngModel)]="currentMember.addresses[0].address1" type="text"
+                        <input #address required matInput [(ngModel)]="currentMember.addresses[0].address1" type="text"
                             placeholder="Address">
                     </mat-form-field>
                     <mat-form-field appearance="legacy">
-                        <input id="city" name="city" required matInput [(ngModel)]="currentMember.addresses[0].city" type="text"
+                        <input #city required matInput [(ngModel)]="currentMember.addresses[0].city" type="text"
                             placeholder="City">
                     </mat-form-field>                
                 </td>
@@ -84,7 +102,7 @@
                 <td>
                     <mat-form-field appearance="legacy" >
                         <mat-label>Province</mat-label>
-                        <mat-select [(ngModel)]="currentMember.addresses[0].province" name="province">
+                        <mat-select [(ngModel)]="currentMember.addresses[0].province" #province>
                           <mat-option *ngFor="let provinceType of provinceTypes" [value]="provinceType.value">
                             {{provinceType.viewValue}}
                           </mat-option>
@@ -92,16 +110,16 @@
                     </mat-form-field>
                     <mat-form-field appearance="legacy">
                         <mat-label>Province</mat-label>
-                        <mat-select [(ngModel)]="currentMember.addresses[0].country" name="country">
+                        <mat-select [(ngModel)]="currentMember.addresses[0].country" #country>
                           <mat-option *ngFor="let countryType of countryTypes" [value]="countryType.value">
                             {{countryType.viewValue}}
                           </mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="legacy">
-                        <input id="postalCode" name="postalCode" 
+                        <input #postalCode 
                             required matInput [(ngModel)]="currentMember.addresses[0].postalCode" type="text"
-                            maxlength="6" placeholder="Postal Code">
+                            maxlength="7" placeholder="Postal Code">
                     </mat-form-field>
                 </td>
             </tr>
@@ -116,7 +134,7 @@
         <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef> Phone Type </th>
             <td mat-cell *matCellDef="let element; let i = index">
-                <mat-select [(ngModel)]="element.type" name="type{{i}}">
+                <mat-select [(ngModel)]="element.type" #type{{i}}>
                     <mat-option *ngFor="let phoneType of phoneTypes" [value]="phoneType">
                       {{phoneType}}
                     </mat-option>
@@ -128,17 +146,17 @@
         <ng-container matColumnDef="number">
             <th mat-header-cell *matHeaderCellDef> Phone Number </th>
             <td mat-cell *matCellDef="let element; let i = index">
-                <input id="number{{i}}" name="number{{i}}" required matInput [(ngModel)]="element.number" 
+                <input #number{{i}} required matInput [(ngModel)]="element.number" 
                 type="text" placeholder="Number">
             </td>
         </ng-container>
 
         <!-- Ext. Column -->
-        <ng-container matColumnDef="extension">
-            <th mat-header-cell *matHeaderCellDef> Extension </th>
+        <ng-container matColumnDef="reference">
+            <th mat-header-cell *matHeaderCellDef> Reference </th>
             <td mat-cell *matCellDef="let element; let i = index">
-                <input id="extension{{i}}" name="extension{{i}}" required matInput [(ngModel)]="element.extension" 
-                type="text" placeholder="Extension">
+                <input #reference{{i}} required matInput [(ngModel)]="element.reference" 
+                type="text" placeholder="Reference">
             </td>
         </ng-container>
 

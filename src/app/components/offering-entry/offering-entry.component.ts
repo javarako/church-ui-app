@@ -1,11 +1,13 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatInput } from '@angular/material/input';
 import { OfferingService } from 'src/app/services/offering.service';
+import { CodesService } from 'src/app/services/codes.service';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 interface OptionValue {
+  id: number;
+  type: string;
   value: string;
   viewValue: string;
 }
@@ -32,24 +34,8 @@ export class OfferingEntryComponent implements OnInit {
     return day == 0;
   }
 
-  offeringTypes: OptionValue[] = [
-    { value: 'Weekly', viewValue: 'Weekly' },
-    { value: 'Easter', viewValue: 'Easter' },
-    { value: 'Thanksgiving', viewValue: 'Thanksgiving' },
-    { value: 'Christmas', viewValue: 'Christmas' },
-    { value: 'Anniversary', viewValue: 'Anniversary' },
-    { value: 'Thanks', viewValue: 'Thanks' },
-    { value: 'Canvas', viewValue: 'Canvas' }
-  ];
-
-  amountTypes: OptionValue[] = [
-    { value: 'Cash', viewValue: 'Cash' },
-    { value: 'Cheque', viewValue: 'Cheque' },
-    { value: 'CreditCard', viewValue: 'CreditCard' },
-    { value: 'eTransfer', viewValue: 'eTransfer' },
-    { value: 'Coin', viewValue: 'Coin' }
-  ];
-
+  offeringTypes: OptionValue[];
+  amountTypes: OptionValue[];
   amountSummary: AmountSummary[];
 
   displayedColumns: string[] = ['offeringDate', 'offeringNumber', 'offeringType', 'amountType', 'amount', 'edit', 'delete'];
@@ -73,10 +59,31 @@ export class OfferingEntryComponent implements OnInit {
 
   constructor(
     private offeringService: OfferingService, 
+    private codesService: CodesService, 
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.retrieveMembers();
+    this.retrieveOfferings();
+     
+    this.codesService.get('OFFERING_TYPE')
+    .subscribe(
+      response => {
+        console.log(response);
+        this.offeringTypes = response;
+      },
+      error => {
+        console.log(error);
+      });
+
+      this.codesService.get('AMOUNT_TYPE')
+      .subscribe(
+        response => {
+          console.log(response);
+          this.amountTypes = response;
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   getRequestParams(offeringSunday): any {
@@ -90,7 +97,7 @@ export class OfferingEntryComponent implements OnInit {
     return params;
   }
 
-  retrieveMembers(): void {
+  retrieveOfferings(): void {
     const params = this.getRequestParams(this.currentOffering.offeringSunday);
 
     this.amountSummary = [];

@@ -19,7 +19,7 @@
     <table>
       <tr>
         <td>
-          <h4>Members List</h4>
+          <h4>Member List</h4>
         </td>
         <td align="right">
           Items per Page:
@@ -41,7 +41,10 @@
                 };
           let i = index
         " [class.active]="i == currentIndex" (click)="setActiveMember(member, i)">
-        {{ member.name }} <span *ngIf="member.nickName"> / {{ member.nickName }} </span>
+        {{ member.name }} 
+        <span *ngIf="member.nickName"> {{ member.nickName }} </span>
+        <span *ngIf="member.spouseName"> / {{ member.spouseName }} </span>
+        <span *ngIf="member.spouseNickName"> {{ member.spouseNickName }} </span>
       </li>
     </ul>
   </div>
@@ -55,6 +58,12 @@
         </div>
         <div>
           <label><strong>Name [Korean]:</strong></label> {{ currentMember.nickName }}
+        </div>
+        <div>
+          <label><strong>Spouse [English]:</strong></label> {{ currentMember.spouseName }}
+        </div>
+        <div>
+          <label><strong>Spouse [Korean]:</strong></label> {{ currentMember.spouseNickName }}
         </div>
         <div>
           <label><strong>Primary Email:</strong></label>
@@ -89,9 +98,9 @@
         </ng-container>
 
         <!-- Ext. Column -->
-        <ng-container matColumnDef="extension">
-          <th mat-header-cell *matHeaderCellDef> Ext. </th>
-          <td mat-cell *matCellDef="let element"> {{element.extension}} </td>
+        <ng-container matColumnDef="reference">
+          <th mat-header-cell *matHeaderCellDef> Reference </th>
+          <td mat-cell *matCellDef="let element"> {{element.reference}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedPhoneColumns"></tr>

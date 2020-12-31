@@ -8,7 +8,7 @@ import { MemberService } from 'src/app/services/member.service';
 })
 export class MembersListComponent implements OnInit {
 
-  displayedPhoneColumns: string[] = ['type', 'number', 'extension'];
+  displayedPhoneColumns: string[] = ['type', 'number', 'reference'];
 
   members: any;
   currentMember = null;

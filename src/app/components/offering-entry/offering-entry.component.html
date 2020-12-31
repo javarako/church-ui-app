@@ -4,7 +4,7 @@
             <mat-form-field class="example-full-width" appearance="fill" style="width:140px !important">
                 <mat-label>Choose a Sunday</mat-label>
                 <input matInput [matDatepickerFilter]="sundayFilter" [matDatepicker]="sundayPicker"
-                    [(ngModel)]="currentOffering.offeringSunday" (dateChange)="retrieveMembers()">
+                    [(ngModel)]="currentOffering.offeringSunday" (dateChange)="retrieveOfferings()">
                 <mat-datepicker-toggle matSuffix [for]="sundayPicker"></mat-datepicker-toggle>
                 <mat-datepicker #sundayPicker></mat-datepicker>
             </mat-form-field>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faTrashAlt, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { CodesService } from 'src/app/services/codes.service';
 
 interface OptionValue {
   value: string;
@@ -38,28 +39,40 @@ export class MemberTemplateComponent implements OnInit {
     {value: 'US', viewValue: 'United States'}
   ];  
   //Location_1("1 구역"), 
-  locationCodes: OptionValue[] = [
-    {value: 'Location_1', viewValue: '1 구역'}, 
-    {value: 'Location_2', viewValue: '2 구역'}, 
-    {value: 'Location_3', viewValue: '3 구역'}, 
-    {value: 'Location_4', viewValue: '4 구역'}, 
-    {value: 'Location_5', viewValue: '5 구역'}, 
-    {value: 'Location_6', viewValue: '6 구역'}
-  ];  
+  locationCodes: OptionValue[];  
   //Samaritan, Emmao, John, Joseph, Jonah
-  groupCodes: string[] = ['Samaritan', 'Emmao', 'John', 'Joseph', 'Jonah'];
+  groupCodes: OptionValue[];
   phoneTypes: string[] = ['Home', 'Work', 'Cell', 'Other'];
-  displayedPhoneColumns: string[] = ['type', 'number', 'extension', 'action'];
+  displayedPhoneColumns: string[] = ['type', 'number', 'reference', 'action'];
   newPhone: any = {}; 
 
-  constructor() { }
+  constructor(private codesService: CodesService) { }
 
   ngOnInit(): void {
+    this.codesService.get('LOCATION_CODE')
+    .subscribe(
+      response => {
+        console.log(response);
+        this.locationCodes = response;
+      },
+      error => {
+        console.log(error);
+      });
+
+      this.codesService.get('GROUP_CODE')
+      .subscribe(
+        response => {
+          console.log(response);
+          this.groupCodes = response;
+        },
+        error => {
+          console.log(error);
+        });
   }
 
     //Phone Dialog handle start ------------------------------------
     addRow() {
-      this.newPhone = {id:null, type:null, countryCode:null, number:null, extension:null, member:null};  
+      this.newPhone = {id:null, type:null, countryCode:null, number:null, reference:null, member:null};  
       this.currentMember.phones.push( this.newPhone );
       this.currentMember.phones = [...this.currentMember.phones];
       console.log(this.currentMember.phones);

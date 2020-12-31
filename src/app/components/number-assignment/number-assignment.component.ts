@@ -13,7 +13,7 @@ export class NumberAssignmentComponent implements OnInit {
 
   archive = faArchive;
 
-  displayedColumns: string[] = ['offeringNumber', 'name', 'nickName', 'address', 'archive'];
+  displayedColumns: string[] = ['offeringNumber', 'name', 'address', 'archive'];
   message = '';
 
   members: any;
