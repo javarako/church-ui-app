@@ -139,6 +139,7 @@ export class BudgetAssignmentComponent implements OnInit {
 
       if (accountNo && !isNaN(Number(accountNo.replace(/-/g, '')))) {
         const data = {
+          id: null,
           year: this.budgetYear,
           accountCode: {
             code: curruntRecord[0].trim(),
