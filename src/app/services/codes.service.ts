@@ -13,7 +13,11 @@ export class CodesService {
   constructor(private http: HttpClient) { }
 
   get(type): Observable<any> {
-    return this.http.get(`${baseUrl}/${type}`);
+    return this.http.get(`${baseUrl}/referenceCode/${type}`);
+  }
+
+  getAccountCode(code): Observable<any> {
+    return this.http.get(`${baseUrl}/account/${code}`);
   }
 
 }

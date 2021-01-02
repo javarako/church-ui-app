@@ -1,0 +1,22 @@
+.list {
+    text-align: left;
+    max-width: 750px;
+    margin: auto;
+  }
+
+.table-row {
+    height: 40px !important;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.example-section {
+    margin: 12px 0;
+  }
+  
+.example-margin {
+    margin: 0 12px;
+  }

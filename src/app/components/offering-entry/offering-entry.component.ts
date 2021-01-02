@@ -143,6 +143,7 @@ export class OfferingEntryComponent implements OnInit {
         },
         error => {
           console.log(error);
+          this.message = error.error.message;
         });
   }
 

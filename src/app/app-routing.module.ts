@@ -4,6 +4,7 @@ import { MembersListComponent } from './components/members-list/members-list.com
 import { MemberDetailsComponent } from './components/member-details/member-details.component';
 import { AddMemberComponent } from './components/add-member/add-member.component';
 import { NumberAssignmentComponent } from './components/number-assignment/number-assignment.component';
+import { BudgetAssignmentComponent } from './components/budget-assignment/budget-assignment.component';
 import { OfferingEntryComponent } from './components/offering-entry/offering-entry.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'members/:id', component: MemberDetailsComponent },
   { path: 'add', component: AddMemberComponent },
   { path: 'numbers', component: NumberAssignmentComponent },
+  { path: 'budgets', component: BudgetAssignmentComponent },
   { path: 'offerings', component: OfferingEntryComponent }
 ];
 

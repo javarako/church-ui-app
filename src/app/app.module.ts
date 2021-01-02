@@ -60,6 +60,7 @@ import { MemberTemplateComponent } from './components/member-template/member-tem
 import { NumberAssignmentComponent } from './components/number-assignment/number-assignment.component';
 import { OfferingEntryComponent } from './components/offering-entry/offering-entry.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { BudgetAssignmentComponent } from './components/budget-assignment/budget-assignment.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MemberTemplateComponent,
     NumberAssignmentComponent,
     OfferingEntryComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    BudgetAssignmentComponent
   ],
   imports: [
     BrowserModule,

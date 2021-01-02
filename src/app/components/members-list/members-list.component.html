@@ -41,10 +41,10 @@
                 };
           let i = index
         " [class.active]="i == currentIndex" (click)="setActiveMember(member, i)">
-        {{ member.name }} 
         <span *ngIf="member.nickName"> {{ member.nickName }} </span>
-        <span *ngIf="member.spouseName"> / {{ member.spouseName }} </span>
-        <span *ngIf="member.spouseNickName"> {{ member.spouseNickName }} </span>
+        {{ member.name }} 
+        <span *ngIf="member.spouseNickName">/ {{ member.spouseNickName }} </span>
+        <span *ngIf="member.spouseName"> {{ member.spouseName }} </span>
       </li>
     </ul>
   </div>
