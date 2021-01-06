@@ -1,0 +1,15 @@
+<div class="list row">
+    <div *ngIf="!submitted">
+      <h4>New Expenditure</h4>
+  
+      <app-expenditure-template [currentItem]="currentItem"></app-expenditure-template>
+      <button mat-stroked-button color="primary" (click)="save()">Submit</button>
+  
+    </div>
+  
+    <div *ngIf="submitted">
+      <h4>You submitted successfully!</h4>
+      <button class="btn btn-success" (click)="new()">Add</button>
+    </div>
+  </div>
+  

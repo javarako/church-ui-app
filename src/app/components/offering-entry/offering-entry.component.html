@@ -1,17 +1,15 @@
 <div class="list row">
     <div class="col-md-8">
         <div class="input-group mb-3">
-            <mat-form-field class="example-full-width" appearance="fill" style="width:140px !important">
-                <mat-label>Choose a Sunday</mat-label>
-                <input matInput [matDatepickerFilter]="sundayFilter" [matDatepicker]="sundayPicker"
+            <mat-form-field class="example-full-width" style="width:140px !important">
+                <input matInput [matDatepickerFilter]="sundayFilter" [matDatepicker]="sundayPicker" placeholder="Choose a Sunday"
                     [(ngModel)]="currentOffering.offeringSunday" (dateChange)="retrieveOfferings()">
                 <mat-datepicker-toggle matSuffix [for]="sundayPicker"></mat-datepicker-toggle>
                 <mat-datepicker #sundayPicker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field class="example-full-width" appearance="fill" style="width:140px !important">
-                <mat-label>Offering date</mat-label>
-                <input matInput [matDatepicker]="offeringPicker" [(ngModel)]="currentOffering.offeringDate">
+            <mat-form-field class="example-full-width" style="width:140px !important">
+                <input matInput [matDatepicker]="offeringPicker" [(ngModel)]="currentOffering.offeringDate" placeholder="Offering date">
                 <mat-datepicker-toggle matSuffix [for]="offeringPicker"></mat-datepicker-toggle>
                 <mat-datepicker #offeringPicker></mat-datepicker>
             </mat-form-field>
@@ -69,7 +67,7 @@
 
             <ng-container matColumnDef="offeringDate">
                 <th mat-header-cell *matHeaderCellDef> Offering Date </th>
-                <td mat-cell *matCellDef="let element">{{element.offeringDate | date : "yyyy/MM/dd"}}</td>
+                <td mat-cell *matCellDef="let element">{{element.offeringDate | date : "MM/dd/yyyy"}}</td>
             </ng-container>
 
             <ng-container matColumnDef="offeringNumber">

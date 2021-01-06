@@ -1,16 +1,9 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OfferingService } from 'src/app/services/offering.service';
-import { CodesService } from 'src/app/services/codes.service';
+import { CodesService, OptionValue } from 'src/app/services/codes.service';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-
-interface OptionValue {
-  id: number;
-  type: string;
-  value: string;
-  viewValue: string;
-}
 
 interface AmountSummary {
   type: string;

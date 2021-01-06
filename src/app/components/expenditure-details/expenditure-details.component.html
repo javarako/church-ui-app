@@ -1,0 +1,26 @@
+<div class="list row">
+    <div>
+        <h4>Expenditure</h4>
+        <app-expenditure-template [currentItem]="currentItem"></app-expenditure-template>
+
+        <button mat-stroked-button color="warn" (click)="delete()">
+            Delete
+        </button>
+
+        <button type="submit" mat-stroked-button color="primary" (click)="update()">
+            Update
+        </button>
+    </div>
+
+    <div>
+    </div>
+
+    <div>
+        <p>{{ message }}</p>
+
+        <div *ngIf="!currentItem">
+            <br />
+            <p>Cannot access this Expenditure...</p>
+        </div>
+    </div>
+</div>

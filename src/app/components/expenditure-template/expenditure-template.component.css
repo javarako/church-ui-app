@@ -1,0 +1,13 @@
+.edit-form {
+    max-width: 600px;
+    margin: auto;
+  }
+
+.table-row {
+    height: 40px !important;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}

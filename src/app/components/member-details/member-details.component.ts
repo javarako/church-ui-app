@@ -68,7 +68,7 @@ export class MemberDetailsComponent implements OnInit {
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Confirm Remove Member',
-        message: 'Are you sure, you want to remove an Member?'
+        message: 'Are you sure, you want to remove a member?'
       }
     });
 

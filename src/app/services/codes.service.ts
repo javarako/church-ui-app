@@ -4,6 +4,12 @@ import { Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8080/api/codes';
 
+export  interface OptionValue {
+  id: number;
+  type: string;
+  value: string;
+  viewValue: string;
+}
 
 @Injectable({
   providedIn: 'root'

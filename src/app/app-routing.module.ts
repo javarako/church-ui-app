@@ -6,15 +6,21 @@ import { AddMemberComponent } from './components/add-member/add-member.component
 import { NumberAssignmentComponent } from './components/number-assignment/number-assignment.component';
 import { BudgetAssignmentComponent } from './components/budget-assignment/budget-assignment.component';
 import { OfferingEntryComponent } from './components/offering-entry/offering-entry.component';
+import { ExpenditureListComponent } from './components/expenditure-list/expenditure-list.component';
+import { ExpenditureDetailsComponent } from './components/expenditure-details/expenditure-details.component';
+import { AddExpenditureComponent } from './components/add-expenditure/add-expenditure.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'members', pathMatch: 'full' },
   { path: 'members', component: MembersListComponent },
   { path: 'members/:id', component: MemberDetailsComponent },
-  { path: 'add', component: AddMemberComponent },
+  { path: 'addMember', component: AddMemberComponent },
   { path: 'numbers', component: NumberAssignmentComponent },
   { path: 'budgets', component: BudgetAssignmentComponent },
-  { path: 'offerings', component: OfferingEntryComponent }
+  { path: 'offerings', component: OfferingEntryComponent },
+  { path: 'expenditures', component: ExpenditureListComponent },
+  { path: 'expenditures/:id', component: ExpenditureDetailsComponent },
+  { path: 'addExpenditure', component: AddExpenditureComponent }
 ];
 
 @NgModule({

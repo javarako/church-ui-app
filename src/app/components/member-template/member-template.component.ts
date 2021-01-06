@@ -1,11 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faTrashAlt, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
-import { CodesService } from 'src/app/services/codes.service';
-
-interface OptionValue {
-  value: string;
-  viewValue: string;
-}
+import { CodesService, OptionValue } from 'src/app/services/codes.service';
 
 @Component({
   selector: 'app-member-template',
@@ -20,23 +15,23 @@ export class MemberTemplateComponent implements OnInit {
   trashAlt = faTrashAlt;
 
   provinceTypes: OptionValue[] = [
-    {value: 'NL', viewValue: 'Newfoundland and Labrador'}, 
-    {value: 'PE', viewValue: 'Prince Edward Island'}, 
-    {value: 'NS', viewValue: 'Nova Scotia'}, 
-    {value: 'NB', viewValue: 'New Brunswick'}, 
-    {value: 'QC', viewValue: 'Quebec'}, 
-    {value: 'ON', viewValue: 'Ontario'}, 
-    {value: 'MB', viewValue: 'Manitoba'}, 
-    {value: 'SK', viewValue: 'Saskatchewan'}, 
-    {value: 'AB', viewValue: 'Alberta'}, 
-    {value: 'BC', viewValue: 'British Columbia'}, 
-    {value: 'YT', viewValue: 'Yukon'}, 
-    {value: 'NT', viewValue: 'Northwest Territories'}, 
-    {value: 'NU', viewValue: 'Nunavut'}
+    {id: 0, type:'province', value: 'NL', viewValue: 'Newfoundland and Labrador'}, 
+    {id: 0, type:'province', value: 'PE', viewValue: 'Prince Edward Island'}, 
+    {id: 0, type:'province', value: 'NS', viewValue: 'Nova Scotia'}, 
+    {id: 0, type:'province', value: 'NB', viewValue: 'New Brunswick'}, 
+    {id: 0, type:'province', value: 'QC', viewValue: 'Quebec'}, 
+    {id: 0, type:'province', value: 'ON', viewValue: 'Ontario'}, 
+    {id: 0, type:'province', value: 'MB', viewValue: 'Manitoba'}, 
+    {id: 0, type:'province', value: 'SK', viewValue: 'Saskatchewan'}, 
+    {id: 0, type:'province', value: 'AB', viewValue: 'Alberta'}, 
+    {id: 0, type:'province', value: 'BC', viewValue: 'British Columbia'}, 
+    {id: 0, type:'province', value: 'YT', viewValue: 'Yukon'}, 
+    {id: 0, type:'province', value: 'NT', viewValue: 'Northwest Territories'}, 
+    {id: 0, type:'province', value: 'NU', viewValue: 'Nunavut'}
   ];
   countryTypes: OptionValue[] = [
-    {value: 'CA', viewValue: 'Canada'}, 
-    {value: 'US', viewValue: 'United States'}
+    {id: 0, type:'country', value: 'CA', viewValue: 'Canada'}, 
+    {id: 0, type:'country', value: 'US', viewValue: 'United States'}
   ];  
   //Location_1("1 구역"), 
   locationCodes: OptionValue[];  
