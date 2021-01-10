@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { MemberDetailsComponent } from './components/member-details/member-details.component';
 import { AddMemberComponent } from './components/add-member/add-member.component';
@@ -11,7 +12,8 @@ import { ExpenditureDetailsComponent } from './components/expenditure-details/ex
 import { AddExpenditureComponent } from './components/add-expenditure/add-expenditure.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'members', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'members', component: MembersListComponent },
   { path: 'members/:id', component: MemberDetailsComponent },
   { path: 'addMember', component: AddMemberComponent },

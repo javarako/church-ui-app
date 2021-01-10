@@ -65,6 +65,9 @@ import { ExpenditureListComponent } from './components/expenditure-list/expendit
 import { ExpenditureDetailsComponent } from './components/expenditure-details/expenditure-details.component';
 import { AddExpenditureComponent } from './components/add-expenditure/add-expenditure.component';
 import { ExpenditureTemplateComponent } from './components/expenditure-template/expenditure-template.component';
+import { LoginComponent } from './components/login/login.component';
+
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -80,7 +83,8 @@ import { ExpenditureTemplateComponent } from './components/expenditure-template/
     ExpenditureListComponent,
     ExpenditureDetailsComponent,
     AddExpenditureComponent,
-    ExpenditureTemplateComponent
+    ExpenditureTemplateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -137,7 +141,7 @@ import { ExpenditureTemplateComponent } from './components/expenditure-template/
 
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

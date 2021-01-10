@@ -1,29 +1,45 @@
 <div>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">United Church of Canada</a>
-    <div class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a routerLink="members" class="nav-link" >Members</a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item" *ngIf="showMembershipMenu">
+        <a routerLink="members" class="nav-link">Members</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showMembershipMenu">
         <a routerLink="addMember" class="nav-link">New Member</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showTreasurerMenu">
         <a routerLink="numbers" class="nav-link">Offering Number</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showAdminMenu">
         <a routerLink="budgets" class="nav-link">Budget</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showTreasurerMenu">
         <a routerLink="offerings" class="nav-link">Offering Entry</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showTreasurerMenu">
         <a routerLink="expenditures" class="nav-link">Expenditures</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="showTreasurerMenu">
         <a routerLink="addExpenditure" class="nav-link">New Expenditure</a>
       </li>
-    </div>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a routerLink="/login" class="nav-link" >Login</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a routerLink="/members/{{ id }}" class="nav-link" >{{ username }}</a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" (click)="logout()">LogOut</a>
+      </li>
+    </ul>
+
   </nav>
 
   <div class="container mt-3">
