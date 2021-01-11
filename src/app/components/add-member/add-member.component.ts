@@ -38,13 +38,26 @@ export class AddMemberComponent implements OnInit {
       country: '',
       postalCode: '',
       mailingAddress: true
-    }]
+    }],
+    roles: [],
+    permissions: []
   };
   submitted = false;
 
   constructor(private memberService: MemberService) { }
 
   ngOnInit(): void {
+  }
+
+  setRoles() {
+    let roles = [];
+    for (var roleType of this.currentMember.permissions) {
+      roles.push({
+        id: null,
+        type: roleType
+      });
+    }
+    return roles;
   }
 
   saveMember(): void {
@@ -57,7 +70,8 @@ export class AddMemberComponent implements OnInit {
       secondaryEmail: this.currentMember.secondaryEmail,
       comment: this.currentMember.comment,
       phones: this.currentMember.phones,
-      addresses: this.currentMember.addresses
+      addresses: this.currentMember.addresses,
+      roles: this.setRoles()
     };
 
     this.memberService.create(data)
@@ -90,7 +104,9 @@ export class AddMemberComponent implements OnInit {
         country: 'CA', //default value
         postalCode: '',
         mailingAddress: true
-      }]
+      }],
+      roles: [],
+      permissions: []
     };
   }
 

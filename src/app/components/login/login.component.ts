@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
     username: null,
     password: null
   };
+  isResetPassword = false;
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -27,6 +28,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (this.isResetPassword) {
+      this.resetPassword();
+      this.isResetPassword = false;
+    } else {
+      this.login();
+    }
+  }
+
+  login(): void {
     const { username, password } = this.form;
 
     this.authService.login(username, password).subscribe(
@@ -46,7 +56,31 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  resetPassword(): void {
+    const { username, oldPassword, password } = this.form;
+
+    this.authService.resetPassword(username, oldPassword, password).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+        this.reloadPage();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
+  }
+
   reloadPage(): void {
     window.location.reload();
+  }
+
+  enableResetPassword(flag: boolean): void {
+    this.isResetPassword = flag;
   }
 }

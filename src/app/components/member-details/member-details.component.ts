@@ -43,6 +43,7 @@ export class MemberDetailsComponent implements OnInit {
             }];
           }
 
+          this.currentMember.permissions = this.setPermissions();
           console.log(data);
         },
         error => {
@@ -50,8 +51,38 @@ export class MemberDetailsComponent implements OnInit {
           this.message = error.error.message;
         });
   }
+  
+  setPermissions() {
+    let roles = [];
+    for (var role of this.currentMember.roles) {
+      roles.push(role.type);
+    }
+    return roles;
+  }
+
+  setRoles() {
+    let roles = [];
+    for (var roleType of this.currentMember.permissions) {
+      let found = false;
+      for (var role of this.currentMember.roles) {
+        if (role.type == roleType) {
+          roles.push(role);
+          found = true;
+        }
+      }
+      if (!found) {
+        roles.push({
+          id: null,
+          type: roleType
+        });
+      }
+    }
+    return roles;
+  }
 
   updateMember(): void {
+    this.currentMember.roles = this.setRoles();
+
     this.memberService.update(this.currentMember.memberId, this.currentMember)
       .subscribe(
         response => {
