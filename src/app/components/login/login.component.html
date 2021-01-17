@@ -1,6 +1,11 @@
 <div class="col-md-12">
     <div class="card card-container">
+        <!--
         <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+        -->
+        <img *ngIf="!isLoggedIn" id="profile-img" src="assets/image/avatar_2x.png" class="profile-img-card" />
+        <span><img *ngIf="isLoggedIn" src={{imageName}} class="profile-img-card" /></span>
+        
         <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group">
                 <label for="username">Username</label>

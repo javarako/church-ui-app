@@ -12,18 +12,24 @@ export class LoginComponent implements OnInit {
     username: null,
     password: null
   };
+  imageLocation = 'assets/image/';
+  imageName = '';
   isResetPassword = false;
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(
+    private authService: AuthService, 
+    private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
+      this.imageName = this.imageLocation + this.tokenStorage.getUser().id + '.png';
+      console.log(this.imageName);
     }
   }
 

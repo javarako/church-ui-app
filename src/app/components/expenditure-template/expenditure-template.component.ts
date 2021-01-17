@@ -1,5 +1,5 @@
-import { Component, Input,  ViewChild, ElementRef, OnInit } from '@angular/core';
-import { CodesService } from 'src/app/services/codes.service';
+import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { CodesService, OptionValue } from 'src/app/services/codes.service';
 
 @Component({
   selector: 'app-expenditure-template',
@@ -8,10 +8,10 @@ import { CodesService } from 'src/app/services/codes.service';
 })
 export class ExpenditureTemplateComponent implements OnInit {
 
-  @Input() public currentItem : any = null;
+  @Input() public currentItem: any = null;
   @ViewChild('accountCode') accountCodeInput: ElementRef;
 
-  constructor(private codesService: CodesService, ) { }
+  constructor(private codesService: CodesService) { }
 
   ngOnInit(): void {
   }

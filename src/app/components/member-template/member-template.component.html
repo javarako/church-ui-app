@@ -54,11 +54,14 @@
                     </mat-form-field>
                 </td>
                 <td>
+                    <img mat-card-image src='assets/image/{{currentMember.memberId}}L.png' alt="Photo" width="300px" >
+                    <!--
                     <mat-form-field style="width: 300px;" appearance="outline">
                         <textarea #comment matInput rows="10" cols="50" [(ngModel)]="currentMember.comment" #msg
                             maxlength="500" placeholder="Comment"></textarea>
                         <mat-hint align="end">{{msg.value.length}} / 500</mat-hint>
                     </mat-form-field>
+                    -->
                 </td>
             </tr>
         </table>

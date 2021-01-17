@@ -26,4 +26,7 @@ export class CodesService {
     return this.http.get(`${baseUrl}/account/${code}`);
   }
 
+  getAllAccountCodes(): Observable<any> {
+    return this.http.get(`${baseUrl}/allAccountCodes`);
+  }
 }
