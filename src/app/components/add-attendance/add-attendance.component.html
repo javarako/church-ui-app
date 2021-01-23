@@ -1,9 +1,17 @@
 <div class="list row">
     <div class="col-md-10">
         <div class="input-group mb-3">
+            <mat-form-field class="example-full-width" style="width:140px !important">
+                <input matInput [matDatepickerFilter]="sundayFilter" [matDatepicker]="sundayPicker"
+                    placeholder="Choose a Sunday" [(ngModel)]="sunday" (dateChange)="retrieve()">
+                <mat-datepicker-toggle matSuffix [for]="sundayPicker"></mat-datepicker-toggle>
+                <mat-datepicker #sundayPicker></mat-datepicker>
+            </mat-form-field>
+
             <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="name" />
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" (click)="retrieveMembers()">
+                <button class="btn btn-outline-secondary" type="button" style="height:40px !important"
+                    (click)="retrieve()">
                     Search
                 </button>
             </div>
@@ -19,7 +27,7 @@
         <table>
             <tr>
                 <td>
-                    <h4>Offering Number List</h4>
+                    <h4>Sunday Attendance</h4>
                 </td>
                 <td align="right">
                     Items per Page:
@@ -40,46 +48,32 @@
             <!--- Note that these columns can be defined in any order.
                         The actual rendered columns are set as a property on the row definition" -->
 
-            <ng-container matColumnDef="offeringNumber">
-                <th mat-header-cell *matHeaderCellDef > Offering # </th>
-                <td mat-cell *matCellDef="let element; let i = index">
-                    <input id="offeringNumber{{i}}" name="offeringNumber{{i}}" style="width:70px !important" 
-                    matInput [(ngModel)]="element.offeringNumber" type="number" placeholder="Offering #"
-                    (change)="updateOfferingNumber(element, i)" >
-                </td>
-            </ng-container>
-
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
                 <td mat-cell *matCellDef="let element;">
-                    <span *ngIf="element.nickName"> {{ element.nickName }} </span>
-                    {{element.name}}
-                    <span *ngIf="element.spouseNickName">/ {{ element.spouseNickName }} </span>
-                    <span *ngIf="element.spouseName"> {{ element.spouseName }} </span>
+                    <section id="name{{i}}" name="name{{i}}">
+                        <mat-checkbox id="attendance{{i}}" name="attendance{{i}}" [(ngModel)]="element.attendance"
+                            (change)="update(element)">
+                            {{element.name}}
+                        </mat-checkbox>
+                    </section>
                 </td>
             </ng-container>
 
-            <ng-container matColumnDef="address">
-                <th mat-header-cell *matHeaderCellDef> Address </th>
+            <ng-container matColumnDef="spouse">
+                <th mat-header-cell *matHeaderCellDef> Spouse </th>
                 <td mat-cell *matCellDef="let element;">
-                    <span *ngIf="element.addresses[0]">
-                        {{element.addresses[0].address1}}, 
-                        {{element.addresses[0].city}}
-                        {{element.addresses[0].province}}
-                    </span>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="archive">
-                <th mat-header-cell *matHeaderCellDef> Archive </th>
-                <td mat-cell *matCellDef="let element" style="text-align: center; vertical-align: middle;">
-                    <fa-icon [icon]="archive" size="lg" (click)="archiveOffering(element.offeringNumber)"></fa-icon>
+                    <section id="spouse{{i}}" name="spouse{{i}}">
+                        <mat-checkbox *ngIf="element.spouseName" id="spouseAttendance{{i}}" name="spouseAttendance{{i}}"
+                            [(ngModel)]="element.spouseAttendance" (change)="update(element)">
+                            {{element.spouseName}}
+                        </mat-checkbox>
+                    </section>
                 </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row class="table-row"
-            *matRowDef="let row; columns: displayedColumns  | paginate : {
+            <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumns  | paginate : {
                 itemsPerPage: pageSize,
                 currentPage: page,
                 totalItems: count

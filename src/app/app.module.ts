@@ -68,6 +68,7 @@ import { ExpenditureTemplateComponent } from './components/expenditure-template/
 import { LoginComponent } from './components/login/login.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { AddAttendanceComponent } from './components/add-attendance/add-attendance.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     ExpenditureDetailsComponent,
     AddExpenditureComponent,
     ExpenditureTemplateComponent,
-    LoginComponent
+    LoginComponent,
+    AddAttendanceComponent
   ],
   imports: [
     BrowserModule,

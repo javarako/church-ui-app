@@ -23,6 +23,9 @@
       <li class="nav-item" *ngIf="showTreasurerMenu">
         <a routerLink="addExpenditure" class="nav-link"><strong>New Expenditure</strong></a>
       </li>
+      <li class="nav-item" *ngIf="showMembershipMenu">
+        <a routerLink="addAttendance" class="nav-link"><strong>Attendance</strong></a>
+      </li>    
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">

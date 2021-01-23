@@ -10,6 +10,7 @@ import { OfferingEntryComponent } from './components/offering-entry/offering-ent
 import { ExpenditureListComponent } from './components/expenditure-list/expenditure-list.component';
 import { ExpenditureDetailsComponent } from './components/expenditure-details/expenditure-details.component';
 import { AddExpenditureComponent } from './components/add-expenditure/add-expenditure.component';
+import { AddAttendanceComponent } from './components/add-attendance/add-attendance.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'offerings', component: OfferingEntryComponent },
   { path: 'expenditures', component: ExpenditureListComponent },
   { path: 'expenditures/:id', component: ExpenditureDetailsComponent },
-  { path: 'addExpenditure', component: AddExpenditureComponent }
+  { path: 'addExpenditure', component: AddExpenditureComponent },
+  { path: 'addAttendance', component: AddAttendanceComponent }
 ];
 
 @NgModule({

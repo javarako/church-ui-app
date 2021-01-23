@@ -54,7 +54,10 @@
                     </mat-form-field>
                 </td>
                 <td>
-                    <img mat-card-image src='assets/image/{{currentMember.memberId}}L.png' alt="Photo" width="300px" >
+                    <img *ngIf="currentMember.memberId" 
+                        mat-card-image src='assets/image/{{currentMember.memberId}}L.png' alt="Photo" width="300px" >
+                    <img *ngIf="!currentMember.memberId" 
+                        mat-card-image src='assets/image/avatar_2xL.png' alt="Photo" width="300px" >
                     <!--
                     <mat-form-field style="width: 300px;" appearance="outline">
                         <textarea #comment matInput rows="10" cols="50" [(ngModel)]="currentMember.comment" #msg
