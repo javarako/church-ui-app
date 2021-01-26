@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AttendanceService } from 'src/app/services/attendance.service';
-import { faArchive } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-add-attendance',
@@ -15,14 +15,18 @@ export class AddAttendanceComponent implements OnInit {
     return day == 0;
   }
 
-  archive = faArchive;
+  plusSquare = faPlusSquare;
+  trashAlt = faTrashAlt;
 
   displayedColumns: string[] = ['name', 'spouse'];
+  displayedVisitorColumns: string[] = ['visitor', 'action'];
   message = '';
 
-  sunday = this.getSundayFromToday();
+  sunday: Date = this.getSundayFromToday();
   members: any;
   visitors: any;
+  visitor: any;
+  maxVisitorId = 10000;
   currentIndex = -1;
   name = '';
   page = 1;
@@ -79,6 +83,16 @@ export class AddAttendanceComponent implements OnInit {
         error => {
           console.log(error);
         });
+
+    //find max id
+    if (this.visitors) {
+      this.visitors.forEach(function (entry) {
+        console.log(entry);
+        if (entry.memberId > this.maxVisitorId) {
+          this.maxVisitorId = entry.memberId;
+        }
+      });
+    }
   }
 
   handlePageChange(event): void {
@@ -93,7 +107,7 @@ export class AddAttendanceComponent implements OnInit {
   }
 
   update(model): void {
-    this.attendanceService.create(model)
+    this.attendanceService.update(model)
       .subscribe(
         response => {
           console.log(response);
@@ -113,4 +127,59 @@ export class AddAttendanceComponent implements OnInit {
       return new Date(today.getTime() + (1000 * 60 * 60 * 24) * (7 - day));
     }
   }
+
+  //Visitor Dialog handle start ------------------------------------
+  /*
+    private Long id;
+    private Date date;
+    private Long memberId;//visitor id starts from 10001 per each date
+    private String name;
+    private boolean attendance;
+    private String spouseName;
+    private boolean spouseAttendance;
+    private String visitorName;    
+  */
+  addRow() {
+    this.maxVisitorId += 1;
+    this.visitor = {
+      id: null,
+      date: this.sunday,
+      memberId: this.maxVisitorId,
+      name: null, attendance: false, spouseName: null, spouseAttendance: false,
+      visitorName: null
+    };
+
+    this.visitors.push(this.visitor);
+    this.visitors = [...this.visitors];
+    console.log(this.visitors);
+    return true;
+  }
+
+  deleteRow(model) {
+    let params = {};
+
+    if (model.date) {
+      params[`sunday`] = new Date(model.date);
+    }
+
+    if (model.memberId) {
+      params[`memberId`] = model.memberId;
+    }
+
+    this.attendanceService.deleteVisitor(params)
+      .subscribe(
+        response => {
+          console.log(response);
+
+          this.visitors = this.visitors.filter((value, key) => {
+            return value.memberId != model.memberId;
+          });
+
+        },
+        error => {
+          console.log(error);
+        });
+  }
+  //Visitor Dialog handle end ------------------------------------
+
 }

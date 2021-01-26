@@ -23,15 +23,21 @@ export class AttendanceService {
     return this.http.post(baseUrl, data);
   }
 
-  update(id, data): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  update(data): Observable<any> {
+    return this.http.put(baseUrl, data);
   }
 
   delete(id): Observable<any> {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 
+  deleteVisitor(params): Observable<any> {
+    return this.http.delete(baseUrl, { params });
+  }
+
+  /*** 
   deleteAll(): Observable<any> {
     return this.http.delete(baseUrl);
   }
+  ***/
 }
