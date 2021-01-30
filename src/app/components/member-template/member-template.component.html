@@ -54,10 +54,7 @@
                     </mat-form-field>
                 </td>
                 <td>
-                    <img *ngIf="currentMember.memberId" 
-                        mat-card-image src='assets/image/{{currentMember.memberId}}L.png' alt="Photo" width="300px" >
-                    <img *ngIf="!currentMember.memberId" 
-                        mat-card-image src='assets/image/avatar_2xL.png' alt="Photo" width="300px" >
+                    <img mat-card-image src='assets/image/{{currentMember.imageName}}L.png' alt="Photo" width="300px">
                     <!--
                     <mat-form-field style="width: 300px;" appearance="outline">
                         <textarea #comment matInput rows="10" cols="50" [(ngModel)]="currentMember.comment" #msg
@@ -90,7 +87,7 @@
 
                     <mat-form-field appearance="legacy">
                         <mat-select [(ngModel)]="currentMember.permissions" multiple #roleCode placeholder="Permission">
-                            <mat-option *ngFor="let code of roleTypes" [value]="code.value">
+                            <mat-option *ngFor="let code of roleTypes" [value]="code.value" [disabled]="!isAdmin">
                                 {{code.viewValue}}
                             </mat-option>
                         </mat-select>

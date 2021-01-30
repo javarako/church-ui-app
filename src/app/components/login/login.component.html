@@ -2,10 +2,11 @@
     <div class="card card-container">
         <!--
         <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-        -->
         <img *ngIf="!isLoggedIn" id="profile-img" src="assets/image/avatar_2x.png" class="profile-img-card" />
         <span><img *ngIf="isLoggedIn" src={{imageName}} class="profile-img-card" /></span>
-        
+        -->
+        <span><img src={{imageName}} class="profile-img-card" /></span>
+
         <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
             <div class="form-group">
                 <label for="username">Username</label>
@@ -18,8 +19,8 @@
 
             <div class="form-group" *ngIf="isResetPassword">
                 <label for="oldPassword">Old Password</label>
-                <input type="password" class="form-control" name="oldPassword" [(ngModel)]="form.oldPassword" 
-                #oldPassword="ngModel" />
+                <input type="password" class="form-control" name="oldPassword" [(ngModel)]="form.oldPassword"
+                    #oldPassword="ngModel" />
             </div>
 
             <div class="form-group">
@@ -36,9 +37,9 @@
 
             <div class="form-group" *ngIf="isResetPassword">
                 <label for="confirmPassword">Re-enter Password</label>
-                <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="form.confirmPassword" required
-                    minlength="6" #confirmPassword="ngModel" />
-                <div class="alert alert-danger" role="alert" 
+                <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="form.confirmPassword"
+                    required minlength="6" #confirmPassword="ngModel" />
+                <div class="alert alert-danger" role="alert"
                     *ngIf="(confirmPassword.errors || password != confirmPassword) && f.submitted">
                     <div *ngIf="confirmPassword.errors.required">Password is required</div>
                     <div *ngIf="confirmPassword.errors.minlength">
@@ -56,7 +57,7 @@
                     <span *ngIf="isResetPassword">Password Reset</span>
                 </button>
             </div>
-            
+
             <div class="form-group">
                 <a *ngIf="!isResetPassword" style="color:blue" (click)="enableResetPassword(true)">
                     Password reset?

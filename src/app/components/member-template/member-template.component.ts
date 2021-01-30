@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faTrashAlt, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { CodesService, OptionValue } from 'src/app/services/codes.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-member-template',
@@ -47,7 +48,11 @@ export class MemberTemplateComponent implements OnInit {
   displayedPhoneColumns: string[] = ['type', 'number', 'reference', 'action'];
   newPhone: any = {};
 
-  constructor(private codesService: CodesService) { }
+  isAdmin: boolean;
+
+  constructor(
+    private codesService: CodesService,
+    private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.codesService.get('LOCATION_CODE')
@@ -70,6 +75,7 @@ export class MemberTemplateComponent implements OnInit {
           console.log(error);
         });
 
+    this.isAdmin = this.tokenStorage.getUser().roles.includes('ROLE_ADMIN');
   }
 
   //Phone Dialog handle start ------------------------------------

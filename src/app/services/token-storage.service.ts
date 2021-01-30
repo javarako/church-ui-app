@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -7,7 +8,8 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class TokenStorageService {
-  constructor() { }
+
+  constructor(private http: HttpClient) { }
 
   signOut(): void {
     window.sessionStorage.clear();
@@ -35,4 +37,5 @@ export class TokenStorageService {
 
     return {};
   }
+
 }

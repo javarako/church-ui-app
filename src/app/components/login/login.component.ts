@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
     username: null,
     password: null
   };
+  defaultImage = 'assets/image/S.png'
   imageLocation = 'assets/image/';
   imageName = '';
   isResetPassword = false;
@@ -21,16 +22,18 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
-      this.imageName = this.imageLocation + this.tokenStorage.getUser().id + '.png';
-      console.log(this.imageName);
+      this.imageName = this.imageLocation + this.tokenStorage.getUser().imageName + 'S.png';
+    } else {
+      this.imageName = this.defaultImage;
     }
+    console.log(this.imageName);
   }
 
   onSubmit(): void {

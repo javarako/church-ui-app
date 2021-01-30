@@ -42,4 +42,5 @@ export class MemberService {
   deleteAll(): Observable<any> {
     return this.http.delete(baseUrl);
   }
+
 }
