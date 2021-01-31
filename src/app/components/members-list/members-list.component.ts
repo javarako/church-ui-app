@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MemberService } from 'src/app/services/member.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-members-list',
@@ -18,8 +19,11 @@ export class MembersListComponent implements OnInit {
   count = 0;
   pageSize = 10;
   pageSizes = [10, 20, 100];
+  isMembership: boolean = false;
 
-  constructor(private memberService: MemberService) { }
+  constructor(
+    private memberService: MemberService,
+    private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     this.retrieveMembers();
@@ -74,6 +78,7 @@ export class MembersListComponent implements OnInit {
   setActiveMember(member, index): void {
     this.currentMember = member;
     this.currentIndex = index;
+    this.isMembership = this.tokenStorage.getUser().roles.includes('ROLE_MEMBERSHIP');
   }
 
   removeAllMembers(): void {

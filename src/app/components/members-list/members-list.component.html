@@ -42,29 +42,30 @@
           let i = index
         " [class.active]="i == currentIndex" (click)="setActiveMember(member, i)">
         <span *ngIf="member.nickName"> {{ member.nickName }} </span>
-        {{ member.name }} 
+        {{ member.name }}
         <span *ngIf="member.spouseNickName">/ {{ member.spouseNickName }} </span>
         <span *ngIf="member.spouseName"> {{ member.spouseName }} </span>
       </li>
     </ul>
   </div>
-  
-  <div class="col-md-6">
+
+  <div class="col-md-5">
     <div *ngIf="currentMember">
       <h4>Member</h4>
       <mat-card class="mat-elevation-z2">
-        <div>
+        <div *ngIf="currentMember.name">
           <label><strong>Name [English]:</strong></label> {{ currentMember.name }}
         </div>
-        <div>
+        <div *ngIf="currentMember.nickName">
           <label><strong>Name [Korean]:</strong></label> {{ currentMember.nickName }}
         </div>
-        <div>
+        <div *ngIf="currentMember.spouseName">
           <label><strong>Spouse [English]:</strong></label> {{ currentMember.spouseName }}
         </div>
-        <div>
+        <div *ngIf="currentMember.spouseNickName">
           <label><strong>Spouse [Korean]:</strong></label> {{ currentMember.spouseNickName }}
         </div>
+        <!--
         <div>
           <label><strong>Primary Email:</strong></label>
           {{ currentMember.primaryEmail }}
@@ -78,10 +79,10 @@
           {{ currentMember.addresses[0].address1 }}, {{ currentMember.addresses[0].city }}
           {{ currentMember.addresses[0].province }}
         </div>
+        -->
       </mat-card>
 
       <table mat-table [dataSource]="currentMember.phones" class="mat-elevation-z2">
-
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
@@ -107,9 +108,17 @@
         <tr mat-row class="table-row" *matRowDef="let row; columns: displayedPhoneColumns;"></tr>
       </table>
 
+      <mat-card class="mat-elevation-z2">
+        <div>
+          <img mat-card-image src='assets/image/{{currentMember.imageName}}S.png' alt="Photo">
+        </div>
+      </mat-card>
+
+      <div *ngIf="isMembership">
       <a mat-stroked-button color="primary" routerLink="/members/{{ currentMember.memberId }}">
         Edit
       </a>
+      </div>
     </div>
 
     <div *ngIf="!currentMember">
@@ -118,10 +127,11 @@
     </div>
   </div>
 
+  <!-- 
   <div class="mt-3">
     <button class="m-3 btn btn-sm btn-danger" (click)="removeAllMembers()">
       Remove All
-    </button>
+    </button> 
 
     Items per Page:
     <select (change)="handlePageSizeChange($event)">
@@ -130,4 +140,6 @@
       </option>
     </select>
   </div>
+  -->
+
 </div>
