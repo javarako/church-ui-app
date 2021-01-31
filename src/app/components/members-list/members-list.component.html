@@ -53,6 +53,7 @@
     <div *ngIf="currentMember">
       <h4>Member</h4>
       <mat-card class="mat-elevation-z2">
+        <!--
         <div *ngIf="currentMember.name">
           <label><strong>Name [English]:</strong></label> {{ currentMember.name }}
         </div>
@@ -65,12 +66,12 @@
         <div *ngIf="currentMember.spouseNickName">
           <label><strong>Spouse [Korean]:</strong></label> {{ currentMember.spouseNickName }}
         </div>
-        <!--
-        <div>
+        -->
+        <div *ngIf="currentMember.primaryEmail">
           <label><strong>Primary Email:</strong></label>
           {{ currentMember.primaryEmail }}
         </div>
-        <div>
+        <div *ngIf="currentMember.secondaryEmail">
           <label><strong>Secondary Email:</strong></label>
           {{ currentMember.secondaryEmail }}
         </div>
@@ -79,7 +80,6 @@
           {{ currentMember.addresses[0].address1 }}, {{ currentMember.addresses[0].city }}
           {{ currentMember.addresses[0].province }}
         </div>
-        -->
       </mat-card>
 
       <table mat-table [dataSource]="currentMember.phones" class="mat-elevation-z2">
