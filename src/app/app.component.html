@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">알파한인연합교회</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item" >
+      <li class="nav-item" *ngIf="showUser">
         <a routerLink="members" class="nav-link"><strong>Members</strong></a>
       </li>
       <li class="nav-item" *ngIf="showMembershipMenu">

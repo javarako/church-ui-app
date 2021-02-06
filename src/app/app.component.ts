@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   showAdminMenu = false;
   showTreasurerMenu = false;
   showMembershipMenu = false;
+  showUser = false;
   id?: number;
   username?: string;
 
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
       this.showAdminMenu = this.roles.includes('ROLE_ADMIN');
       this.showTreasurerMenu = this.roles.includes('ROLE_TREASURER');
       this.showMembershipMenu = this.roles.includes('ROLE_MEMBERSHIP');
+      this.showUser = this.roles.includes('ROLE_USER');
 
       this.id = user.id;
       this.username = user.username;
