@@ -1,18 +1,10 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.0
 jobs:
   build:
     docker:
       - image: circleci/node@10.16.3
     steps:
       - checkout
-      - run:
-        name: update-npm
-        command: 'sudo npm install -g npm@6.4.1'
-      - run:
-        name: install-packages
-        command: 'npm install'
-      - run:
-        name: build-site
-        command: 'npm run build'
+      - run: 'sudo npm install -g npm@6.4.1'
+      - run: 'npm install'
+      - run: 'npm run build'
