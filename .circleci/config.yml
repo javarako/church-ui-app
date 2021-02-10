@@ -15,4 +15,4 @@ jobs:
             --acl public-read \
             --cache-control "max-age=86400"
           from: dist/church-ui-app/
-          to: 's3://aws:s3:::alpha-church-ui'
+          to: 's3://alpha-church-ui'
