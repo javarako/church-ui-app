@@ -1,7 +1,7 @@
 .edit-form {
     max-width: 600px;
     margin: auto;
-  }
+}
 
 .table-row {
     height: 40px !important;
@@ -10,4 +10,11 @@
 table {
     width: 100%;
     border-collapse: collapse;
+}
+
+.example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 40px;
 }

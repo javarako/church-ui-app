@@ -14,14 +14,18 @@
                         <input #accountCode required matInput [(ngModel)]="currentItem.accountCode.code" type="text"
                             (change)="retrieveAccountCode()" placeholder="Account Code">
                     </mat-form-field>
-                   
+
                     <p>{{currentItem.accountCode.item}}</p>
                     <p>{{currentItem.accountCode.committee}}</p>
 
-                    <mat-form-field appearance="legacy" style="width:130px !important">
-                        <input #amount required matInput [(ngModel)]="currentItem.amount" type="number"
-                            placeholder="Amount">
-                    </mat-form-field>
+                    <section class="example-section">
+                        <mat-form-field appearance="legacy" style="width:130px !important">
+                            <input #amount required matInput [(ngModel)]="currentItem.amount" type="number"
+                                placeholder="Amount">
+                        </mat-form-field>
+
+                        <mat-checkbox #hst [(ngModel)]="currentItem.hst" placeholder="HST">HST</mat-checkbox>
+                    </section>
 
                     <mat-form-field appearance="legacy" style="width:130px !important">
                         <input #requester required matInput [(ngModel)]="currentItem.requester" type="text"
@@ -33,11 +37,12 @@
                             placeholder="Signature">
                     </mat-form-field>
 
+                    <!--
                     <mat-form-field appearance="legacy" style="width:130px !important">
                         <input #treasurerInitial required matInput [(ngModel)]="currentItem.treasurerInitial"
                             type="text" placeholder="Treasurer Initial">
                     </mat-form-field>
-
+                    -->
                     <mat-form-field appearance="legacy" style="width:130px !important">
                         <input #chequeNo required matInput [(ngModel)]="currentItem.chequeNo" type="number"
                             placeholder="Cheque No">
@@ -51,7 +56,7 @@
                 </td>
                 <td>
                     <mat-form-field style="width: 300px;" appearance="outline">
-                        <textarea #remarks matInput rows="11" cols="50" [(ngModel)]="currentItem.remarks" #msg
+                        <textarea #remarks matInput rows="10" cols="50" [(ngModel)]="currentItem.remarks" #msg
                             maxlength="500" placeholder="Remarks"></textarea>
                         <mat-hint align="end">{{msg.value.length}} / 500</mat-hint>
                     </mat-form-field>

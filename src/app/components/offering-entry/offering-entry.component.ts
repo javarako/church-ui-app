@@ -45,7 +45,8 @@ export class OfferingEntryComponent implements OnInit {
     offeringNumber: '',
     offeringType: '',
     amountType: '',
-    amount: ''
+    amount: '',
+    memo: ''
   };
 
   currentIndex = -1;
@@ -119,7 +120,8 @@ export class OfferingEntryComponent implements OnInit {
       offeringNumber: this.currentOffering.offeringNumber,
       offeringType: this.currentOffering.offeringType,
       amountType: this.currentOffering.amountType,
-      amount: this.currentOffering.amount
+      amount: this.currentOffering.amount,
+      memo: this.currentOffering.memo
     };
 
     this.message = '';
@@ -148,7 +150,8 @@ export class OfferingEntryComponent implements OnInit {
       offeringNumber: '',
       offeringType: '',
       amountType: '',
-      amount: ''
+      amount: '',
+      memo: ''
     };
     this.editable = false;
   }
