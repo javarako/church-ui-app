@@ -50,6 +50,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
@@ -143,7 +144,8 @@ import { AddAttendanceComponent } from './components/add-attendance/add-attendan
 
     FontAwesomeModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

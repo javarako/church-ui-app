@@ -119,7 +119,7 @@
     </div>
 
     <div *ngIf="amountSummary && amountSummary.length > 0" class="col-md-4">
-        <h4>Total amount: {{totalAmount}}</h4>
+        <h4><b>Offerint total amount: {{totalAmount}}</b></h4>
         <!-- List start -->
         <table mat-table [dataSource]="amountSummary" class="mat-elevation-z2">
             <!--- Note that these columns can be defined in any order.
@@ -139,6 +139,65 @@
             <tr mat-row class="table-row" *matRowDef="let row; columns: displayedTotalColumns">
             </tr>
         </table>
-
+        
+        <!-- List start -->
+        <table class="mat-elevation-z2">
+            <tr>
+                <td><b>Deposit Detail</b></td>
+                <td><button *ngIf="depositMatch" mat-stroked-button color="accent" (click)="saveAndPrintDeposit()">Print</button></td>
+            </tr>
+            <tr *ngIf="!depositMatch" >
+                <td colspan="2"><p style="background-color:tomato;color:white;">Cash amount NOT match!</p></td>
+            </tr>
+            <tr>
+                <td>Cheque total</td>
+                <td>{{deposit.chequeTotal}}</td>
+            </tr>
+            <tr>
+                <td>Cash total</td>
+                <td>{{deposit.cashTotal}}</td>
+            </tr>
+            <tr>
+                <td>
+                    $100_X_
+                    <input #bill100 [(ngModel)]="deposit.bill100" type="number" (change)="updateDepositAmount()" style="width:70px !important" >
+                </td>
+                <td>{{deposit.bill100Total}}</td>
+            </tr>
+            <tr>
+                <td>
+                    $_50_X_
+                    <input #bill050 [(ngModel)]="deposit.bill050" type="number" (change)="updateDepositAmount()" style="width:70px !important" >
+                </td>
+                <td>{{deposit.bill050Total}}</td>
+            </tr>
+            <tr>
+                <td>
+                    $_10_X_
+                    <input #bill010 [(ngModel)]="deposit.bill010" type="number" (change)="updateDepositAmount()" style="width:70px !important" >
+                </td>
+                <td>{{deposit.bill010Total}}</td>
+            </tr>
+            <tr>
+                <td>
+                    $__5_X_
+                    <input #bill005 [(ngModel)]="deposit.bill005" type="number" (change)="updateDepositAmount()" style="width:70px !important" >
+                </td>
+                <td>{{deposit.bill005Total}}</td>
+            </tr>
+            <tr>
+                <td>Coin out</td>
+                <td>
+                    <input #coinOut [(ngModel)]="deposit.coinOut" type="number" (change)="updateDepositAmount()" style="width:70px !important" >
+                </td>
+            </tr>
+            <tr>
+                <td>Coin change in</td>
+                <td>
+                    <input #coinIn [(ngModel)]="deposit.coinIn" type="number" (change)="updateDepositAmount()" style="width:70px !important" >
+                </td>
+            </tr>
+        </table>
     </div>
+
 </div>

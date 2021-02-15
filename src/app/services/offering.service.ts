@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8080/api/secure/offerings';
@@ -31,4 +31,13 @@ export class OfferingService {
     return this.http.delete(`${baseUrl}/${id}`);
   }
 
+  getDepositDetai(id): Observable<any> {
+    return this.http.get(`${baseUrl}/depositDetail/${id}`);
+  }
+
+  saveDepositDetail(data): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.post(`${baseUrl}/depositDetail`, data,  { headers: headers, responseType: 'blob' });
+  }
 }

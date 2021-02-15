@@ -4,6 +4,7 @@ import { OfferingService } from 'src/app/services/offering.service';
 import { CodesService, OptionValue } from 'src/app/services/codes.service';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import * as fileSaver from 'file-saver';
 
 interface AmountSummary {
   type: string;
@@ -49,27 +50,45 @@ export class OfferingEntryComponent implements OnInit {
     memo: ''
   };
 
+  deposit = {
+    offeringSunday: null,
+    depositTotal: 0,
+    chequeTotal: 0,
+    cashTotal: 0,
+    bill100: 0,
+    bill100Total: 0,
+    bill050: 0,
+    bill050Total: 0,
+    bill010: 0,
+    bill010Total: 0,
+    bill005: 0,
+    bill005Total: 0,
+    coinIn: 0,
+    coinOut: 0
+  }
+
+  depositMatch: boolean;
   currentIndex = -1;
 
   constructor(
-    private offeringService: OfferingService, 
-    private codesService: CodesService, 
+    private offeringService: OfferingService,
+    private codesService: CodesService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.retrieveOfferings();
-     
-    this.codesService.get('OFFERING_TYPE')
-    .subscribe(
-      response => {
-        console.log(response);
-        this.offeringTypes = response;
-      },
-      error => {
-        console.log(error);
-      });
 
-      this.codesService.get('AMOUNT_TYPE')
+    this.codesService.get('OFFERING_TYPE')
+      .subscribe(
+        response => {
+          console.log(response);
+          this.offeringTypes = response;
+        },
+        error => {
+          console.log(error);
+        });
+
+    this.codesService.get('AMOUNT_TYPE')
       .subscribe(
         response => {
           console.log(response);
@@ -111,6 +130,18 @@ export class OfferingEntryComponent implements OnInit {
         error => {
           console.log(error);
         });
+
+    this.offeringService.getDepositDetai(this.currentOffering.offeringSunday)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.deposit = response;
+          this.updateDepositAmount();
+        },
+        error => {
+          console.log(error);
+        });
+
   }
 
   saveOffering(): void {
@@ -257,6 +288,7 @@ export class OfferingEntryComponent implements OnInit {
       amount = amount + value.total;
     });
 
+    this.updateDepositAmount();
     return amount;
   }
 
@@ -270,4 +302,79 @@ export class OfferingEntryComponent implements OnInit {
       return new Date(today.getTime() + (1000 * 60 * 60 * 24) * (7 - day));
     }
   }
+
+  updateDepositAmount(): void {
+
+    let cashItem = null;
+    let chequeItem = null;
+
+    if (this.amountSummary && this.amountSummary.length > 0) {
+      cashItem = this.amountSummary.find(i => i.type === 'Cash');
+      chequeItem = this.amountSummary.find(i => i.type === 'Cheque');
+    }
+
+    if (cashItem == null) {
+      cashItem = {
+        type: 'Cash',
+        total: 0
+      }
+    }
+
+    if (chequeItem == null) {
+      chequeItem = {
+        type: 'Cheque',
+        total: 0
+      }
+    }
+
+    let bill100Total = this.deposit.bill100 * 100;
+    let bill050Total = this.deposit.bill050 * 50;
+    let bill010Total = this.deposit.bill010 * 10;
+    let bill005Total = this.deposit.bill005 * 5;
+
+    let cashTotal = bill100Total + bill050Total + bill010Total + bill005Total;
+
+    let depositTotal = cashTotal + chequeItem.total;
+
+    if (cashTotal === (cashItem.total + this.deposit.coinIn - this.deposit.coinOut)) {
+      console.log('Deposit amount match!');
+      this.depositMatch = true;
+    } else {
+      console.log('Deposit amount NOT match!');
+      this.depositMatch = false;
+    }
+
+    this.deposit = {
+      offeringSunday: this.currentOffering.offeringSunday,
+      depositTotal: depositTotal,
+      chequeTotal: chequeItem.total,
+      cashTotal: cashTotal,
+      bill100: this.deposit.bill100,
+      bill100Total: bill100Total,
+      bill050: this.deposit.bill050,
+      bill050Total: bill050Total,
+      bill010: this.deposit.bill010,
+      bill010Total: bill010Total,
+      bill005: this.deposit.bill005,
+      bill005Total: bill005Total,
+      coinIn: this.deposit.coinIn,
+      coinOut: this.deposit.coinOut
+    }
+  }
+
+  saveAndPrintDeposit(): void {
+    this.message = '';
+    this.offeringService.saveDepositDetail(this.deposit)
+      .subscribe(
+        file => {
+          //console.log(response);
+          const blob = new Blob([file], { type: 'pdf' }); // you can change the type
+          fileSaver.saveAs(blob, 'WeeklyOfferingReport' + (new Date().getTime()) + '.pdf');
+        },
+        error => {
+          console.log(error);
+          this.message = error.error.message;
+        });
+  }
+
 }
