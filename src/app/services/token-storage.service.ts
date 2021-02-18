@@ -26,6 +26,7 @@ export class TokenStorageService {
     this.authToken = null;
     this.user = null;
     window.sessionStorage.clear();
+    window.location.reload();
   }
 
   public saveToken(token: string): void {
