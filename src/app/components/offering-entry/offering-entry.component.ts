@@ -37,7 +37,6 @@ export class OfferingEntryComponent implements OnInit {
   message = '';
   editable = false;
   totalAmount = 0;
-  originalAmount = 0;
   offerings: any;
   currentOffering = {
     id: null,
@@ -54,13 +53,17 @@ export class OfferingEntryComponent implements OnInit {
     offeringSunday: null,
     depositTotal: 0,
     chequeTotal: 0,
+    usChequeTotal: 0,
     cashTotal: 0,
+    usCashTotal: 0,
     bill100: 0,
     bill100Total: 0,
     bill050: 0,
     bill050Total: 0,
+    bill020: 0,
+    bill020Total: 0,
     bill010: 0,
-    bill010Total: 0,
+    bill010Total: 0,    
     bill005: 0,
     bill005Total: 0,
     coinIn: 0,
@@ -113,7 +116,6 @@ export class OfferingEntryComponent implements OnInit {
   retrieveOfferings(): void {
     const params = this.getRequestParams(this.currentOffering.offeringSunday);
 
-    this.amountSummary = [];
     this.message = '';
     this.offeringService.getAll(params)
       .subscribe(
@@ -121,15 +123,13 @@ export class OfferingEntryComponent implements OnInit {
           console.log(response);
           const { offerings } = response;
           this.offerings = offerings;
-          for (let entry of offerings) {
-            this.amountAdd(entry);
-          }
-          this.totalAmount = this.getTotalAmount();
+          this.getTotalAmount();
           this.newOffering();
         },
         error => {
           console.log(error);
         });
+
 
     this.offeringService.getDepositDetai(this.currentOffering.offeringSunday)
       .subscribe(
@@ -139,6 +139,26 @@ export class OfferingEntryComponent implements OnInit {
           this.updateDepositAmount();
         },
         error => {
+          this.deposit = {
+            offeringSunday: this.deposit.offeringSunday,
+            depositTotal: this.deposit.depositTotal,
+            chequeTotal: this.deposit.chequeTotal,
+            usChequeTotal: this.deposit.usChequeTotal,
+            cashTotal: 0,
+            usCashTotal: 0,
+            bill100: 0,
+            bill100Total: 0,
+            bill050: 0,
+            bill050Total: 0,
+            bill020: 0,
+            bill020Total: 0,
+            bill010: 0,
+            bill010Total: 0,    
+            bill005: 0,
+            bill005Total: 0,
+            coinIn: 0,
+            coinOut: 0
+          }
           console.log(error);
         });
 
@@ -162,7 +182,8 @@ export class OfferingEntryComponent implements OnInit {
           console.log(response);
           this.offerings.unshift(response);
           this.offerings = [...this.offerings];
-          this.amountAdd(response);
+          this.getTotalAmount();
+          this.updateDepositAmount();
           this.newOffering();
           this.editable = false;
           this.offeringNumberInput.nativeElement.focus();
@@ -189,7 +210,6 @@ export class OfferingEntryComponent implements OnInit {
 
   editOffering(offering): void {
     this.currentOffering = offering;
-    this.originalAmount = offering.amount;
     this.editable = true;
     this.message = '';
   }
@@ -199,10 +219,9 @@ export class OfferingEntryComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.amountUpdate(response);
           this.editable = false;
-          this.originalAmount = 0;
           this.message = 'The offering was updated successfully!';
+          this.getTotalAmount();
           this.newOffering();
           this.offeringNumberInput.nativeElement.focus();
         },
@@ -226,10 +245,10 @@ export class OfferingEntryComponent implements OnInit {
           .subscribe(
             response => {
               console.log(response);
-              this.amountDelete(type, amount);
               this.offerings = this.offerings.filter((value, key) => {
                 return value.id != id;
               });
+              this.getTotalAmount();
               this.offeringNumberInput.nativeElement.focus();
             },
             error => {
@@ -240,56 +259,29 @@ export class OfferingEntryComponent implements OnInit {
     });
   }
 
-  amountAdd(offering): void {
-    let item = null;
+  getTotalAmount(): void {
+    this.amountSummary = [];
+    this.totalAmount = 0;
+    //calculate all
+    if (this.offerings && this.offerings.length > 0) {
+      for (var offering of this.offerings) {
+        let item = this.amountSummary.find(i => i.type === offering.amountType);
+        if (item != null) {
+          item.total = item.total + offering.amount;
+        } else {
+          item = {
+            type: offering.amountType,
+            total: offering.amount
+          }
+          this.amountSummary.push(item);
+        }
 
-    if (this.amountSummary && this.amountSummary.length > 0) {
-      item = this.amountSummary.find(i => i.type === offering.amountType);
-    }
-
-    if (item == null) {
-      item = {
-        type: offering.amountType,
-        total: offering.amount
+        this.totalAmount = this.totalAmount + offering.amount;
       }
-      this.amountSummary.push(item);
-    } else {
-      item.total = item.total + offering.amount;
     }
 
-    this.totalAmount = this.getTotalAmount();
     this.amountSummary = [...this.amountSummary];
-  }
-
-  amountUpdate(offering): void {
-    let item = this.amountSummary.find(i => i.type === offering.amountType);
-    if (item != null) {
-      item.total = item.total + offering.amount;
-      item.total = item.total - this.originalAmount;
-    }
-
-    this.totalAmount = this.getTotalAmount();
-    this.amountSummary = [...this.amountSummary];
-  }
-
-  amountDelete(type, amount): void {
-    let item = this.amountSummary.find(i => i.type === type);
-    if (item != null) {
-      item.total = item.total - amount;
-    }
-
-    this.totalAmount = this.getTotalAmount();
-    this.amountSummary = [...this.amountSummary];
-  }
-
-  getTotalAmount(): number {
-    let amount = 0;
-    this.amountSummary.forEach(function (value) {
-      amount = amount + value.total;
-    });
-
     this.updateDepositAmount();
-    return amount;
   }
 
   getSundayFromToday(): Date {
@@ -307,36 +299,36 @@ export class OfferingEntryComponent implements OnInit {
 
     let cashItem = null;
     let chequeItem = null;
+    let usCashItem = null;
+    let usChequeItem = null;
 
     if (this.amountSummary && this.amountSummary.length > 0) {
       cashItem = this.amountSummary.find(i => i.type === 'Cash');
       chequeItem = this.amountSummary.find(i => i.type === 'Cheque');
-    }
-
-    if (cashItem == null) {
-      cashItem = {
-        type: 'Cash',
-        total: 0
-      }
-    }
-
-    if (chequeItem == null) {
-      chequeItem = {
-        type: 'Cheque',
-        total: 0
-      }
+      usCashItem = this.amountSummary.find(i => i.type === 'USCash');
+      usChequeItem = this.amountSummary.find(i => i.type === 'USCheque');
     }
 
     let bill100Total = this.deposit.bill100 * 100;
     let bill050Total = this.deposit.bill050 * 50;
+    let bill020Total = this.deposit.bill020 * 20;
     let bill010Total = this.deposit.bill010 * 10;
     let bill005Total = this.deposit.bill005 * 5;
 
-    let cashTotal = bill100Total + bill050Total + bill010Total + bill005Total;
+    let cashTotal = bill100Total + bill050Total + bill020Total + bill010Total + bill005Total;
 
-    let depositTotal = cashTotal + chequeItem.total;
+    let depositTotal = cashTotal;
+    if (chequeItem != null) {
+      depositTotal = depositTotal + chequeItem.total;
+    }
+    if (usChequeItem != null) {
+      depositTotal = depositTotal + usChequeItem.total;
+    }
+    if (usCashItem != null) {
+      depositTotal = depositTotal + usCashItem.total;
+    }
 
-    if (cashTotal === (cashItem.total + this.deposit.coinIn - this.deposit.coinOut)) {
+    if (cashTotal === ((cashItem == null ? 0:cashItem.total) + this.deposit.coinIn - this.deposit.coinOut)) {
       console.log('Deposit amount match!');
       this.depositMatch = true;
     } else {
@@ -347,12 +339,16 @@ export class OfferingEntryComponent implements OnInit {
     this.deposit = {
       offeringSunday: this.currentOffering.offeringSunday,
       depositTotal: depositTotal,
-      chequeTotal: chequeItem.total,
+      chequeTotal: chequeItem == null ? 0:chequeItem.total,
+      usChequeTotal: usChequeItem == null ? 0:usChequeItem.total,
       cashTotal: cashTotal,
+      usCashTotal: usCashItem == null ? 0:usCashItem.total,
       bill100: this.deposit.bill100,
       bill100Total: bill100Total,
       bill050: this.deposit.bill050,
       bill050Total: bill050Total,
+      bill020: this.deposit.bill020,
+      bill020Total: bill020Total,
       bill010: this.deposit.bill010,
       bill010Total: bill010Total,
       bill005: this.deposit.bill005,

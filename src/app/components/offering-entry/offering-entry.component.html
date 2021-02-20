@@ -154,8 +154,16 @@
                 <td>{{deposit.chequeTotal}}</td>
             </tr>
             <tr>
+                <td>US Cheque total</td>
+                <td>{{deposit.usChequeTotal}}</td>
+            </tr>
+            <tr>
                 <td>Cash total</td>
                 <td>{{deposit.cashTotal}}</td>
+            </tr>
+            <tr>
+                <td>US Cash total</td>
+                <td>{{deposit.usCashTotal}}</td>
             </tr>
             <tr>
                 <td>
@@ -170,6 +178,13 @@
                     <input #bill050 [(ngModel)]="deposit.bill050" type="number" (change)="updateDepositAmount()" style="width:70px !important" >
                 </td>
                 <td>{{deposit.bill050Total}}</td>
+            </tr>
+            <tr>
+                <td>
+                    $_20_X_
+                    <input #bill020 [(ngModel)]="deposit.bill020" type="number" (change)="updateDepositAmount()" style="width:70px !important" >
+                </td>
+                <td>{{deposit.bill020Total}}</td>
             </tr>
             <tr>
                 <td>
