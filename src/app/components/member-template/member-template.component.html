@@ -117,7 +117,7 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field appearance="legacy">
-                        <mat-label>Province</mat-label>
+                        <mat-label>Country</mat-label>
                         <mat-select [(ngModel)]="currentMember.addresses[0].country" #country>
                             <mat-option *ngFor="let countryType of countryTypes" [value]="countryType.value">
                                 {{countryType.viewValue}}

@@ -18,14 +18,15 @@
                     <p>{{currentItem.accountCode.item}}</p>
                     <p>{{currentItem.accountCode.committee}}</p>
 
-                    <section class="example-section">
-                        <mat-form-field appearance="legacy" style="width:130px !important">
-                            <input #amount required matInput [(ngModel)]="currentItem.amount" type="number"
-                                placeholder="Amount">
-                        </mat-form-field>
+                    <mat-form-field appearance="legacy" style="width:130px !important">
+                        <input #amount required matInput [(ngModel)]="currentItem.amount" type="number"
+                            placeholder="Amount">
+                    </mat-form-field>
 
-                        <mat-checkbox #hst [(ngModel)]="currentItem.hst" placeholder="HST">HST</mat-checkbox>
-                    </section>
+                    <mat-form-field appearance="legacy" style="width:130px !important">
+                        <input #hstAmount required matInput [(ngModel)]="currentItem.hstAmount" type="number"
+                            placeholder="HST Amount">
+                    </mat-form-field>
 
                     <mat-form-field appearance="legacy" style="width:130px !important">
                         <input #requester required matInput [(ngModel)]="currentItem.requester" type="text"
@@ -53,10 +54,15 @@
                             placeholder="Payable To">
                     </mat-form-field>
 
+                    <section class="example-section">
+                        <mat-checkbox #hst [(ngModel)]="currentItem.chequeClear" placeholder="Cheque Clear">Cheque Clear
+                        </mat-checkbox>
+                    </section>
+
                 </td>
                 <td>
                     <mat-form-field style="width: 300px;" appearance="outline">
-                        <textarea #remarks matInput rows="10" cols="50" [(ngModel)]="currentItem.remarks" #msg
+                        <textarea #remarks matInput rows="11" cols="50" [(ngModel)]="currentItem.remarks" #msg
                             maxlength="500" placeholder="Remarks"></textarea>
                         <mat-hint align="end">{{msg.value.length}} / 500</mat-hint>
                     </mat-form-field>
