@@ -70,6 +70,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AddAttendanceComponent } from './components/add-attendance/add-attendance.component';
+import { ReportDownloadComponent } from './components/report-download/report-download.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { AddAttendanceComponent } from './components/add-attendance/add-attendan
     AddExpenditureComponent,
     ExpenditureTemplateComponent,
     LoginComponent,
-    AddAttendanceComponent
+    AddAttendanceComponent,
+    ReportDownloadComponent
   ],
   imports: [
     BrowserModule,

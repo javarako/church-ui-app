@@ -20,7 +20,7 @@
         <a routerLink="offerings" class="nav-link"><strong>Offering Entry</strong></a>
       </li>
       <li class="nav-item" *ngIf="showTreasurerMenu">
-        <a routerLink="expenditures" class="nav-link"><strong>Expenditures</strong></a>
+        <a routerLink="expenditures" class="nav-link"><strong>Expenditure</strong></a>
       </li>
       <li class="nav-item" *ngIf="showTreasurerMenu">
         <a routerLink="addExpenditure" class="nav-link"><strong>New Expenditure</strong></a>
@@ -28,6 +28,9 @@
       <li class="nav-item" *ngIf="showMembershipMenu">
         <a routerLink="addAttendance" class="nav-link"><strong>Attendance</strong></a>
       </li>    
+      <li class="nav-item" *ngIf="showUser">
+        <a routerLink="reports" class="nav-link"><strong>Report</strong></a>
+      </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">

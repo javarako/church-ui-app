@@ -11,6 +11,7 @@ import { ExpenditureListComponent } from './components/expenditure-list/expendit
 import { ExpenditureDetailsComponent } from './components/expenditure-details/expenditure-details.component';
 import { AddExpenditureComponent } from './components/add-expenditure/add-expenditure.component';
 import { AddAttendanceComponent } from './components/add-attendance/add-attendance.component';
+import { ReportDownloadComponent } from './components/report-download/report-download.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'expenditures', component: ExpenditureListComponent },
   { path: 'expenditures/:id', component: ExpenditureDetailsComponent },
   { path: 'addExpenditure', component: AddExpenditureComponent },
-  { path: 'addAttendance', component: AddAttendanceComponent }
+  { path: 'addAttendance', component: AddAttendanceComponent },
+  { path: 'reports', component: ReportDownloadComponent }
 ];
 
 @NgModule({
