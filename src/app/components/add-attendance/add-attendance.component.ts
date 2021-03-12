@@ -121,11 +121,11 @@ export class AddAttendanceComponent implements OnInit {
     let today: Date = new Date();
     const day = today.getDay();
     // Only able to select Sunday.
-    if (day == 0) {
-      return today;
-    } else {
-      return new Date(today.getTime() + (1000 * 60 * 60 * 24) * (7 - day));
+    if (day != 0) {
+      today = new Date(today.getTime() + (1000 * 60 * 60 * 24) * (7 - day));
     }
+    today.setHours(0, 0, 0, 0);
+    return today;    
   }
 
   //Visitor Dialog handle start ------------------------------------

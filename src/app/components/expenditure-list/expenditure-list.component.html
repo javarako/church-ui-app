@@ -1,19 +1,19 @@
 <div class="list row">
     <div class="col-md-10">
         <div class="input-group mb-1">
-            <mat-form-field class="example-full-width" style="width:140px !important">
+            <mat-form-field class="example-full-width" style="width:140px; margin-right:10px !important">
                 <input matInput [matDatepicker]="startPicker" [(ngModel)]="beginDate" placeholder="From date">
                 <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                 <mat-datepicker #startPicker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field class="example-full-width" style="width:140px !important">
+            <mat-form-field class="example-full-width" style="width:140px; margin-right:10px !important">
                 <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDate" placeholder="To date">
                 <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
                 <mat-datepicker #endPicker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field appearance="legacy">
+            <mat-form-field appearance="legacy" style="width:140px; margin-right:10px !important">
                 <mat-select [(ngModel)]="committee" #offeringType placeholder="Committee">
                     <mat-option *ngFor="let type of committeeCodes" [value]="type.value">
                         {{type.viewValue}}

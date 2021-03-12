@@ -1,22 +1,37 @@
 <div class="list row">
     <div class="col-md-10">
         <div class="input-group mb-1">
-            <mat-form-field class="example-full-width" style="width:140px !important">
+            <mat-form-field class="example-full-width" style="width:140px; margin-right:10px !important">
                 <input matInput [matDatepicker]="startPicker" [(ngModel)]="beginDate" placeholder="From date">
                 <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                 <mat-datepicker #startPicker></mat-datepicker>
             </mat-form-field>
-
+            &nbsp;&nbsp;&nbsp;
             <mat-form-field class="example-full-width" style="width:140px !important">
                 <input matInput [matDatepicker]="endPicker" [(ngModel)]="endDate" placeholder="To date">
                 <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
                 <mat-datepicker #endPicker></mat-datepicker>
             </mat-form-field>
+        </div>
 
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" (click)="financialReportDownload()"
-                    style="height:40px !important">Financial Report Download</button>
-            </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="financialReportDownload()"
+                style="height:40px; width:300px !important">Financial Report Download</button>
+        </div>
+
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="offeringReportDownload()"
+                style="height:40px; width:300px !important">Offering Report Download</button>
+        </div>
+
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="expenditureReportDownload('Expenditure_Report')"
+                style="height:40px; width:300px !important">Expenditure Report Download</button>
+        </div>
+        
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="expenditureReportDownload('Outstanding_Cheque')"
+                style="height:40px; width:300px !important">Outstanding Cheque Report</button>
         </div>
     </div>
     <div *ngIf="message" style="color:blue">{{message}}</div>

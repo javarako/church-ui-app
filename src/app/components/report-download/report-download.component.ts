@@ -24,7 +24,7 @@ export class ReportDownloadComponent implements OnInit {
     this.message = '';
 
     this.reportParam = {
-      type: 'financialReport',
+      type: 'FinancialReport',
       fromDate: this.beginDate,
       toDate: this.endDate
     }
@@ -35,6 +35,50 @@ export class ReportDownloadComponent implements OnInit {
           //console.log(response); Financial_Report_2021.xlsx
           const blob = new Blob([file], { type: 'xlsx' }); // you can change the type
           fileSaver.saveAs(blob, 'Financial_Report_2021_' + (new Date().getTime()) + '.xlsx');
+        },
+        error => {
+          console.log(error);
+          this.message = error.error.message;
+        });
+  }
+
+  offeringReportDownload(): void {
+    this.message = '';
+
+    this.reportParam = {
+      type: 'OfferingReport',
+      fromDate: this.beginDate,
+      toDate: this.endDate
+    }
+
+    this.reportService.offeringReport(this.reportParam)
+      .subscribe(
+        file => {
+          //console.log(response); Financial_Report_2021.xlsx
+          const blob = new Blob([file], { type: 'csv' }); // you can change the type
+          fileSaver.saveAs(blob, 'Offering_Report_' + (new Date().getTime()) + '.csv');
+        },
+        error => {
+          console.log(error);
+          this.message = error.error.message;
+        });
+  }
+
+  expenditureReportDownload(reportType): void {
+    this.message = '';
+
+    this.reportParam = {
+      type: reportType,
+      fromDate: this.beginDate,
+      toDate: this.endDate
+    }
+
+    this.reportService.expenditureReport(this.reportParam)
+      .subscribe(
+        file => {
+          //console.log(response); Financial_Report_2021.xlsx
+          const blob = new Blob([file], { type: 'csv' }); // you can change the type
+          fileSaver.saveAs(blob, 'Expenditure_Report_' + (new Date().getTime()) + '.csv');
         },
         error => {
           console.log(error);

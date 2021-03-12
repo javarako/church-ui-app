@@ -1,7 +1,7 @@
 <div class="list row">
     <div class="col-md-8">
         <div class="input-group mb-3">
-            <mat-form-field class="example-full-width" style="width:140px !important">
+            <mat-form-field class="example-full-width" style="width:140px; margin-right:10px !important">
                 <input matInput [matDatepickerFilter]="sundayFilter" [matDatepicker]="sundayPicker" placeholder="Choose a Sunday"
                     [(ngModel)]="currentOffering.offeringSunday" (dateChange)="retrieveOfferings()">
                 <mat-datepicker-toggle matSuffix [for]="sundayPicker"></mat-datepicker-toggle>
