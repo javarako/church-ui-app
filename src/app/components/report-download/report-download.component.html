@@ -16,22 +16,22 @@
 
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="financialReportDownload()"
-                style="height:40px; width:300px !important">Financial Report Download</button>
+                style="height:40px; width:300px; margin-bottom:5px !important">Financial Report Download</button>
         </div>
 
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="offeringReportDownload()"
-                style="height:40px; width:300px !important">Offering Report Download</button>
+                style="height:40px; width:300px; margin-bottom:5px !important">Offering Report Download</button>
         </div>
 
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="expenditureReportDownload('Expenditure_Report')"
-                style="height:40px; width:300px !important">Expenditure Report Download</button>
+                style="height:40px; width:300px; margin-bottom:5px !important">Expenditure Report Download</button>
         </div>
         
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="expenditureReportDownload('Outstanding_Cheque')"
-                style="height:40px; width:300px !important">Outstanding Cheque Report</button>
+                style="height:40px; width:300px; margin-bottom:5px !important">Outstanding Cheque Report</button>
         </div>
     </div>
     <div *ngIf="message" style="color:blue">{{message}}</div>
