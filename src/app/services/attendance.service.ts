@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { GlobalConstantsComponent } from '../global-constants/global-constants.component';
 
-const baseUrl = 'http://' + location.hostname + ':8081/api/secure/attendances';
+const baseUrl = GlobalConstantsComponent.apiURL + '/api/secure/attendances';
 
 @Injectable({
   providedIn: 'root'

@@ -71,6 +71,7 @@ import { LoginComponent } from './components/login/login.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AddAttendanceComponent } from './components/add-attendance/add-attendance.component';
 import { ReportDownloadComponent } from './components/report-download/report-download.component';
+import { GlobalConstantsComponent } from './global-constants/global-constants.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { ReportDownloadComponent } from './components/report-download/report-dow
     ExpenditureTemplateComponent,
     LoginComponent,
     AddAttendanceComponent,
-    ReportDownloadComponent
+    ReportDownloadComponent,
+    GlobalConstantsComponent
   ],
   imports: [
     BrowserModule,

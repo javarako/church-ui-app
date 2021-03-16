@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { GlobalConstantsComponent } from '../global-constants/global-constants.component';
 
-const baseUrl = 'http://' + location.hostname + ':8081/api/secure/report';
+const baseUrl = GlobalConstantsComponent.apiURL + '/api/secure/report';
 
 export  interface ReportParam {
   type: string;
