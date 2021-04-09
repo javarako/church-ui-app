@@ -6,6 +6,10 @@ interface Member {
   nickName: string;
   spouseName: string;
   spouseNickName: string;
+  groupCode: string,
+  locationCode: string,
+  birthDate: string,
+  spouseBirthDate: string,
   primaryEmail: string;
   secondaryEmail: string;
   comment: string;
@@ -26,6 +30,10 @@ export class AddMemberComponent implements OnInit {
     nickName: '',
     spouseName: '',
     spouseNickName: '',
+    groupCode: '',
+    locationCode: '',
+    birthDate: '',
+    spouseBirthDate: '',
     primaryEmail: '',
     secondaryEmail: '',
     comment: '',
@@ -34,8 +42,8 @@ export class AddMemberComponent implements OnInit {
       type: 'Home',
       address1: '',
       city: '',
-      province: '',
-      country: '',
+      province: 'ON',
+      country: 'CA',
       postalCode: '',
       mailingAddress: true
     }],
@@ -68,6 +76,10 @@ export class AddMemberComponent implements OnInit {
       spouseNickName: this.currentMember.spouseNickName,
       primaryEmail: this.currentMember.primaryEmail,
       secondaryEmail: this.currentMember.secondaryEmail,
+      groupCode: this.currentMember.groupCode,
+      locationCode: this.currentMember.locationCode,
+      birthDate: this.currentMember.birthDate,
+      spouseBirthDate: this.currentMember.spouseBirthDate,
       comment: this.currentMember.comment,
       phones: this.currentMember.phones,
       addresses: this.currentMember.addresses,
@@ -94,6 +106,10 @@ export class AddMemberComponent implements OnInit {
       spouseNickName: '',
       primaryEmail: '',
       secondaryEmail: '',
+      groupCode: '',
+      locationCode: '',
+      birthDate: '',
+      spouseBirthDate: '',
       comment: '',
       phones: [],
       addresses: [{

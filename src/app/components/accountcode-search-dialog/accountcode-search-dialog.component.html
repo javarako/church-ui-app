@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Account Code Search</h1>
+<div mat-dialog-content>
+    <div class="mat-elevation-z2">
+        <mat-form-field appearance="legacy">
+            <mat-label>Committee</mat-label>
+            <mat-select #groupCode (selectionChange)="getAccountList($event.value)">
+                <mat-option *ngFor="let code of committeeCodes" [value]="code.value">
+                    {{code.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <input style="margin:0px 10px;" type="button" value="Select" [mat-dialog-close]="currentAccount.code">
+        <input type="button" value="Cancel"  [mat-dialog-close]="false">
+    </div>
+
+    <div class="mat-elevation-z2">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="
+                let account of accountList;
+                let i = index
+            " [class.active]="i == currentIndex" (click)="setSelection(account, i)">
+            {{ account.code }}, {{ account.fundType }}, {{ account.item }}
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="currentAccount.code" style="float:right;margin:20px;">
+        <input style="margin:0px 10px;" type="button" value="Select" [mat-dialog-close]="currentAccount.code">
+        <input type="button" value="Cancel"  [mat-dialog-close]="false">
+    </div>
+</div>

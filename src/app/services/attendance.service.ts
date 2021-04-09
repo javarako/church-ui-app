@@ -16,6 +16,10 @@ export class AttendanceService {
     return this.http.get(baseUrl, { params });
   }
 
+  getCount(params): Observable<any> {
+    return this.http.get(`${baseUrl}/count`, { params });
+  }
+
   get(id): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`);
   }

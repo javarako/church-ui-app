@@ -121,8 +121,7 @@ export class OfferingEntryComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          const { offerings } = response;
-          this.offerings = offerings;
+          this.offerings = response;
           this.getTotalAmount();
           this.newOffering();
         },

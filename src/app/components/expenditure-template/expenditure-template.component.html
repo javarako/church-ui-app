@@ -14,6 +14,7 @@
                         <input #accountCode required matInput [(ngModel)]="currentItem.accountCode.code" type="text"
                             (change)="retrieveAccountCode()" placeholder="Account Code">
                     </mat-form-field>
+                    <fa-icon [icon]="faSearch" size="lg" (click)="searchAccount()"></fa-icon>
 
                     <p>{{currentItem.accountCode.item}}</p>
                     <p>{{currentItem.accountCode.committee}}</p>

@@ -27,6 +27,10 @@ export class CodesService {
     return this.http.get(`${baseUrl}/account/${code}`);
   }
 
+  getAccountCodesByCommittee(committee): Observable<any> {
+    return this.http.get(`${baseUrl}/accountCodesByCommittee/${committee}`);
+  }
+
   getAllAccountCodes(): Observable<any> {
     return this.http.get(`${baseUrl}/allAccountCodes`);
   }

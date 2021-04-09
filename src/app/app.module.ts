@@ -72,6 +72,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AddAttendanceComponent } from './components/add-attendance/add-attendance.component';
 import { ReportDownloadComponent } from './components/report-download/report-download.component';
 import { GlobalConstantsComponent } from './global-constants/global-constants.component';
+import { AccountcodeSearchDialogComponent } from './components/accountcode-search-dialog/accountcode-search-dialog.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { GlobalConstantsComponent } from './global-constants/global-constants.co
     LoginComponent,
     AddAttendanceComponent,
     ReportDownloadComponent,
-    GlobalConstantsComponent
+    GlobalConstantsComponent,
+    AccountcodeSearchDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -19,7 +19,7 @@ export class AddAttendanceComponent implements OnInit {
   trashAlt = faTrashAlt;
 
   displayedColumns: string[] = ['name', 'spouse'];
-  displayedVisitorColumns: string[] = ['visitor', 'action'];
+  displayedVisitorColumns: string[] = ['visitor', 'kid', 'action'];
   message = '';
 
   sunday: Date = this.getSundayFromToday();
@@ -34,6 +34,10 @@ export class AddAttendanceComponent implements OnInit {
   pageSize = 10;
   pageSizes = [10, 20, 100];
   sortBy = 'nickName';
+  attendance = {
+    adult: 0,
+    childrun: 0
+  };
 
   constructor(
     private attendanceService: AttendanceService) { }
@@ -79,20 +83,22 @@ export class AddAttendanceComponent implements OnInit {
           this.visitors = visitors;
           this.count = totalItems;
           console.log(response);
+
+          //find max id
+          if (this.visitor) {
+            this.visitors.forEach(function (entry) {
+              console.log(entry);
+              if (entry.memberId > this.maxVisitorId) {
+                this.maxVisitorId = entry.memberId;
+              }
+            });
+          }
+
+          this.countAttendance();
         },
         error => {
           console.log(error);
         });
-
-    //find max id
-    if (this.visitors) {
-      this.visitors.forEach(function (entry) {
-        console.log(entry);
-        if (entry.memberId > this.maxVisitorId) {
-          this.maxVisitorId = entry.memberId;
-        }
-      });
-    }
   }
 
   handlePageChange(event): void {
@@ -111,6 +117,7 @@ export class AddAttendanceComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
+          this.countAttendance();
         },
         error => {
           console.log(error);
@@ -125,7 +132,25 @@ export class AddAttendanceComponent implements OnInit {
       today = new Date(today.getTime() + (1000 * 60 * 60 * 24) * (7 - day));
     }
     today.setHours(0, 0, 0, 0);
-    return today;    
+    return today;
+  }
+
+  countAttendance(): void {
+    let params = {};
+
+    if (this.sunday) {
+      params[`sunday`] = this.sunday;
+    }
+
+    this.attendanceService.getCount(params)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.attendance = response;
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   //Visitor Dialog handle start ------------------------------------
@@ -146,7 +171,8 @@ export class AddAttendanceComponent implements OnInit {
       date: this.sunday,
       memberId: this.maxVisitorId,
       name: null, attendance: false, spouseName: null, spouseAttendance: false,
-      visitorName: null
+      visitorName: null,
+      kid: null
     };
 
     this.visitors.push(this.visitor);
@@ -175,10 +201,13 @@ export class AddAttendanceComponent implements OnInit {
             return value.memberId != model.memberId;
           });
 
+          this.visitors = [...this.visitors];
+          this.countAttendance();
         },
         error => {
           console.log(error);
         });
+
   }
   //Visitor Dialog handle end ------------------------------------
 

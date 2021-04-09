@@ -130,7 +130,15 @@
                     </mat-form-field>
                 </td>
             </tr>
-        </table>
+            <tr>
+                <td>
+                    <mat-form-field appearance="legacy" style="width:540px !important">
+                        <input #comment required matInput [(ngModel)]="currentMember.comment" type="text"
+                            placeholder="Comment">
+                    </mat-form-field>
+                </td>
+            </tr>
+    </table>
     </mat-card>
 
     <table mat-table [dataSource]="currentMember.phones" class="mat-elevation-z2">

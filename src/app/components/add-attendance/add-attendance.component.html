@@ -84,6 +84,23 @@
     </div>
 
     <div class="col-md-5">
+        <h4><b>Attendance count</b></h4>
+        <!-- List start -->
+        <table class="mat-elevation-z2">
+            <tr>
+                <td>Attendance total</td>
+                <td>{{attendance.adult + attendance.childrun}}</td>
+            </tr>
+            <tr>
+                <td>Audult</td>
+                <td>{{attendance.adult}}</td>
+            </tr>
+            <tr>
+                <td>Childrun</td>
+                <td>{{attendance.childrun}}</td>
+            </tr>
+        </table>
+
         <table mat-table [dataSource]="visitors" class="mat-elevation-z2">
             <!--- Note that these columns can be defined in any order.
                         The actual rendered columns are set as a property on the row definition" -->
@@ -94,6 +111,17 @@
                 <td mat-cell *matCellDef="let element; let i = index">
                     <input #visitorName{{i}} required matInput [(ngModel)]="element.visitorName" type="text"
                         (change)="update(element)" placeholder="Visitor name">
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="kid">
+                <th mat-header-cell *matHeaderCellDef> Kid? </th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                    <section id="kid{{i}}" name="kid{{i}}">
+                        <mat-checkbox id="kidAttendance{{i}}" name="kidAttendance{{i}}"
+                            [(ngModel)]="element.kid" (change)="update(element)">
+                        </mat-checkbox>
+                    </section>
                 </td>
             </ng-container>
 
