@@ -288,7 +288,7 @@ export class OfferingEntryComponent implements OnInit {
     const day = today.getDay();
     // Only able to select Sunday.
     if (day != 0) {
-      today = new Date(today.getTime() + (1000 * 60 * 60 * 24) * (7 - day));
+      today = new Date(today.getTime() - (1000 * 60 * 60 * 24) * day);
     }
     today.setHours(0, 0, 0, 0);
     return today;

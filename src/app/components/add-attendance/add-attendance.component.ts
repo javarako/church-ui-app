@@ -9,12 +9,6 @@ import { faTrashAlt, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 })
 export class AddAttendanceComponent implements OnInit {
 
-  sundayFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    // Only able to select Sunday.
-    return day == 0;
-  }
-
   plusSquare = faPlusSquare;
   trashAlt = faTrashAlt;
 
@@ -129,7 +123,7 @@ export class AddAttendanceComponent implements OnInit {
     const day = today.getDay();
     // Only able to select Sunday.
     if (day != 0) {
-      today = new Date(today.getTime() + (1000 * 60 * 60 * 24) * (7 - day));
+      today = new Date(today.getTime() - (1000 * 60 * 60 * 24) * day);
     }
     today.setHours(0, 0, 0, 0);
     return today;

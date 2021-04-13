@@ -2,7 +2,7 @@
     <div class="col-md-8">
         <div class="input-group mb-3">
             <mat-form-field class="example-full-width" style="width:140px; margin-right:10px !important">
-                <input matInput [matDatepickerFilter]="sundayFilter" [matDatepicker]="sundayPicker"
+                <input matInput [matDatepicker]="sundayPicker"
                     placeholder="Choose a Sunday" [(ngModel)]="sunday" (dateChange)="retrieve()">
                 <mat-datepicker-toggle matSuffix [for]="sundayPicker"></mat-datepicker-toggle>
                 <mat-datepicker #sundayPicker></mat-datepicker>
