@@ -119,7 +119,7 @@
     </div>
 
     <div *ngIf="amountSummary && amountSummary.length > 0" class="col-md-4">
-        <h4><b>Offerint total amount: {{totalAmount}}</b></h4>
+        <h4><b>Offerint total amount: {{totalAmount | number: '1.2-2'}}</b></h4>
         <!-- List start -->
         <table mat-table [dataSource]="amountSummary" class="mat-elevation-z2">
             <!--- Note that these columns can be defined in any order.
@@ -132,7 +132,7 @@
 
             <ng-container matColumnDef="total">
                 <th mat-header-cell *matHeaderCellDef> Total </th>
-                <td mat-cell *matCellDef="let element;">{{element.total}}</td>
+                <td mat-cell *matCellDef="let element;">{{element.total | number: '1.2-2'}}</td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedTotalColumns"></tr>
@@ -151,7 +151,7 @@
             </tr>
             <tr>
                 <td>Cheque total</td>
-                <td>{{deposit.chequeTotal}}</td>
+                <td>{{deposit.chequeTotal | number: '1.2-2'}}</td>
             </tr>
             <tr>
                 <td>US Cheque total</td>
