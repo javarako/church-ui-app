@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Offering Number Search</h1>
+<div mat-dialog-content>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="name" />
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="retrieveMembers()">
+                Search
+            </button>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <pagination-controls previousLabel="Prev" nextLabel="Next" responsive="true"
+            (pageChange)="handlePageChange($event)"></pagination-controls>
+    </div>
+
+    <div class="mat-elevation-z2">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="
+            let member of members | paginate : {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          " [class.active]="i == currentIndex" (click)="setSelection(member, i)">
+                <span *ngIf="member.nickName"> {{ member.nickName }} </span>
+                {{ member.name }}
+                <span *ngIf="member.spouseNickName">/ {{ member.spouseNickName }} </span>
+                <span *ngIf="member.spouseName"> {{ member.spouseName }} </span>
+                <span *ngIf="member.offeringNumber;else no_number"> [# {{ member.offeringNumber }}] </span>
+                <ng-template #no_number><span style="background-color:tomato;color:white;">No offering number</span></ng-template>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="currentMember.offeringNumber" style="float:right;margin:20px;">
+        <input style="margin:0px 10px;" type="button" value="Select" [mat-dialog-close]="currentMember.offeringNumber">
+        <input type="button" value="Cancel" [mat-dialog-close]="false">
+    </div>
+</div>

@@ -2,8 +2,9 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OfferingService } from 'src/app/services/offering.service';
 import { CodesService, OptionValue } from 'src/app/services/codes.service';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { OfferingnumberSearchDialogComponent } from '../offeringnumber-search-dialog/offeringnumber-search-dialog.component';
 import * as fileSaver from 'file-saver';
 
 interface AmountSummary {
@@ -19,8 +20,10 @@ interface AmountSummary {
 export class OfferingEntryComponent implements OnInit {
 
   @ViewChild('offeringNumber') offeringNumberInput: ElementRef;
+  @ViewChild('offeringTypeInput') offeringTypeInput: ElementRef;
   faEdit = faEdit;
   trashAlt = faTrashAlt;
+  faSearch = faSearch;
 
   sundayFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
@@ -101,6 +104,17 @@ export class OfferingEntryComponent implements OnInit {
           console.log(error);
         });
   }
+
+  searchNumber(): void {
+    const searchDialog = this.dialog.open(OfferingnumberSearchDialogComponent);
+
+    searchDialog.afterClosed().subscribe(result => {
+      if (result != '') {
+        this.currentOffering.offeringNumber = result;
+        //this.offeringTypeInput.nativeElement.focus();
+      }
+    });
+  }    
 
   getRequestParams(offeringSunday): any {
     // tslint:disable-next-line:prefer-const

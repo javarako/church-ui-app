@@ -22,9 +22,11 @@
                 [(ngModel)]="currentOffering.offeringNumber" type="number" placeholder="Number">
         </mat-form-field>
 
+        <fa-icon [icon]="faSearch" size="lg" (click)="searchNumber()"></fa-icon>
+
         <mat-form-field appearance="legacy" style="width:120px !important">
             <mat-label>Offering Type</mat-label>
-            <mat-select [(ngModel)]="currentOffering.offeringType" #offeringType>
+            <mat-select [(ngModel)]="currentOffering.offeringType" #offeringTypeInput>
                 <mat-option *ngFor="let type of offeringTypes" [value]="type.value">
                     {{type.viewValue}}
                 </mat-option>
@@ -40,7 +42,7 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="legacy" style="width:100px !important">
+        <mat-form-field appearance="legacy" style="width:80px !important">
             <input id="amount" #amount required matInput [(ngModel)]="currentOffering.amount" type="number"
                 placeholder="Amount">
         </mat-form-field>

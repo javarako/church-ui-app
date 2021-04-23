@@ -73,6 +73,7 @@ import { AddAttendanceComponent } from './components/add-attendance/add-attendan
 import { ReportDownloadComponent } from './components/report-download/report-download.component';
 import { GlobalConstantsComponent } from './global-constants/global-constants.component';
 import { AccountcodeSearchDialogComponent } from './components/accountcode-search-dialog/accountcode-search-dialog.component';
+import { OfferingnumberSearchDialogComponent } from './components/offeringnumber-search-dialog/offeringnumber-search-dialog.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { AccountcodeSearchDialogComponent } from './components/accountcode-searc
     AddAttendanceComponent,
     ReportDownloadComponent,
     GlobalConstantsComponent,
-    AccountcodeSearchDialogComponent
+    AccountcodeSearchDialogComponent,
+    OfferingnumberSearchDialogComponent
   ],
   imports: [
     BrowserModule,
