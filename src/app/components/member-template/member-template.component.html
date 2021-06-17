@@ -85,7 +85,7 @@
                         <mat-error>Please enter a valid email address</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="legacy">
+                    <mat-form-field appearance="legacy" style="width:170px !important">
                         <mat-select [(ngModel)]="currentMember.permissions" multiple #roleCode placeholder="Permission">
                             <mat-option *ngFor="let code of roleTypes" [value]="code.value" [disabled]="!isAdmin">
                                 {{code.viewValue}}
@@ -100,7 +100,7 @@
                         <input #address required matInput [(ngModel)]="currentMember.addresses[0].address1" type="text"
                             placeholder="Address">
                     </mat-form-field>
-                    <mat-form-field appearance="legacy">
+                    <mat-form-field appearance="legacy" style="width:170px !important">
                         <input #city required matInput [(ngModel)]="currentMember.addresses[0].city" type="text"
                             placeholder="City">
                     </mat-form-field>
@@ -124,7 +124,7 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field appearance="legacy">
+                    <mat-form-field appearance="legacy" style="width:170px !important">
                         <input #postalCode required matInput [(ngModel)]="currentMember.addresses[0].postalCode"
                             type="text" maxlength="7" placeholder="Postal Code">
                     </mat-form-field>
@@ -132,7 +132,7 @@
             </tr>
             <tr>
                 <td>
-                    <mat-form-field appearance="legacy" style="width:540px !important">
+                    <mat-form-field appearance="legacy" style="width:530px !important">
                         <input #comment required matInput [(ngModel)]="currentMember.comment" type="text"
                             placeholder="Comment">
                     </mat-form-field>
