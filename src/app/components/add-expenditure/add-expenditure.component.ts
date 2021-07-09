@@ -17,6 +17,7 @@ export class AddExpenditureComponent implements OnInit {
       committee: '---'
     },
     amount: '',
+    hstAmount: '',
     requester: '',
     signature: '',
     treasurerInitial: '',
@@ -42,6 +43,7 @@ export class AddExpenditureComponent implements OnInit {
         committee: this.currentItem.accountCode.committee,
       },
       amount: this.currentItem.amount,
+      hstAmount: this.currentItem.hstAmount,
       requester: this.currentItem.requester,
       signature: this.currentItem.signature,
       treasurerInitial: this.currentItem.treasurerInitial,
@@ -73,6 +75,7 @@ export class AddExpenditureComponent implements OnInit {
         committee: '---'
       },
       amount: '',
+      hstAmount: '',
       requester: '',
       signature: '',
       treasurerInitial: '',
