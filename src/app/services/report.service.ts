@@ -9,6 +9,8 @@ export  interface ReportParam {
   type: string;
   fromDate: Date;
   toDate: Date;
+  allMember?: boolean;
+  offeringNo?: string;
 }
 
 @Injectable({
@@ -28,6 +30,12 @@ export class ReportService {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'text/csv');
     return this.http.post(`${baseUrl}/offering`, data,  { headers: headers, responseType: 'blob' });
+  }
+
+  offeringTaxReceipt(data): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.post(`${baseUrl}/taxreceipt`, data,  { headers: headers, responseType: 'blob' });
   }
 
   expenditureReport(data): Observable<any> {

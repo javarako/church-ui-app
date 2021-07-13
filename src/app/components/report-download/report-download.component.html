@@ -33,6 +33,18 @@
             <button class="btn btn-outline-secondary" type="button" (click)="expenditureReportDownload('Outstanding_Cheque')"
                 style="height:40px; width:300px; margin-bottom:5px !important">Outstanding Cheque Report</button>
         </div>
+
+        <div >
+            <button class="btn btn-outline-secondary" type="button" (click)="taxReceiptDownload()"
+                style="height:40px; width:300px; margin-bottom:5px !important">Tax Receipt Download</button>
+            &nbsp;    
+            <mat-checkbox class="example-margin" [(ngModel)]="allMember">All </mat-checkbox>
+            &nbsp;
+            <mat-form-field *ngIf="!allMember" appearance="legacy" style="width:80px !important">
+                <input matInput [(ngModel)]="offeringNo" type="number"
+                    placeholder="Offering No">
+            </mat-form-field>
+        </div>
     </div>
     <div *ngIf="message" style="color:blue">{{message}}</div>
 </div>

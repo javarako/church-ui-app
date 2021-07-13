@@ -13,6 +13,8 @@ export class ReportDownloadComponent implements OnInit {
   reportParam: ReportParam;
   beginDate = this.getJanuaryFirst();
   endDate = new Date();
+  allMember: boolean;
+  offeringNo = '';
   message = '';
 
   constructor(private reportService: ReportService) { }
@@ -27,7 +29,7 @@ export class ReportDownloadComponent implements OnInit {
       type: 'FinancialReport',
       fromDate: this.beginDate,
       toDate: this.endDate
-    }
+     }
 
     this.reportService.financialReport(this.reportParam)
       .subscribe(
@@ -62,6 +64,30 @@ export class ReportDownloadComponent implements OnInit {
           console.log(error);
           this.message = error.error.message;
         });
+  }
+
+  taxReceiptDownload(): void {
+    this.message = '';
+
+    this.reportParam = {
+      type: 'TaxReceipt',
+      fromDate: this.beginDate,
+      toDate: this.endDate,
+      allMember: this.allMember,
+      offeringNo: this.offeringNo
+    }
+
+    this.reportService.offeringTaxReceipt(this.reportParam)
+    .subscribe(
+      file => {
+        //console.log(response);
+        const blob = new Blob([file], { type: 'pdf' }); // you can change the type
+        fileSaver.saveAs(blob, 'OfferingTaxReceipt_' + (new Date().getTime()) + '.pdf');
+      },
+      error => {
+        console.log(error);
+        this.message = error.error.message;
+      });
   }
 
   expenditureReportDownload(reportType): void {
