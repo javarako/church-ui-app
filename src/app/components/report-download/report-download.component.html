@@ -22,6 +22,13 @@
         <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" (click)="offeringReportDownload()"
                 style="height:40px; width:300px; margin-bottom:5px !important">Offering Report Download</button>
+            &nbsp;    
+            <mat-checkbox class="example-margin" [(ngModel)]="allMemberOff">All </mat-checkbox>
+            &nbsp;
+            <mat-form-field *ngIf="!allMemberOff" appearance="legacy" style="width:80px !important">
+                <input matInput [(ngModel)]="offeringNoOff" type="number"
+                    placeholder="Offering No">
+            </mat-form-field>
         </div>
 
         <div class="input-group-append">

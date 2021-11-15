@@ -13,6 +13,8 @@ export class ReportDownloadComponent implements OnInit {
   reportParam: ReportParam;
   beginDate = this.getJanuaryFirst();
   endDate = new Date();
+  allMemberOff: boolean;
+  offeringNoOff = '';
   allMember: boolean;
   offeringNo = '';
   message = '';
@@ -50,7 +52,9 @@ export class ReportDownloadComponent implements OnInit {
     this.reportParam = {
       type: 'OfferingReport',
       fromDate: this.beginDate,
-      toDate: this.endDate
+      toDate: this.endDate,
+      allMember: this.allMemberOff,
+      offeringNo: this.offeringNoOff
     }
 
     this.reportService.offeringReport(this.reportParam)
